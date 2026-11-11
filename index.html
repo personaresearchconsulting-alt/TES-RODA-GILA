@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INDEX PORTAL LATIHAN RODA GILA | Persona Research & Consulting</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0b2340;
+            --gold: #d4a017;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text: #1e293b;
+            --gray: #64748b;
+        }
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        header {
+            background: var(--navy);
+            color: white;
+            padding: 30px 5%;
+            text-align: center;
+            border-bottom: 5px solid var(--gold);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 24px;
+            letter-spacing: 0.5px;
+        }
+        header p {
+            margin: 8px 0 0;
+            font-size: 14px;
+            color: var(--gold);
+            font-weight: 600;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .intro-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+            border-left: 6px solid var(--gold);
+        }
+        .intro-card h2 {
+            margin-top: 0;
+            color: var(--navy);
+            font-size: 20px;
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--navy);
+            margin: 25px 0 15px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border-color: var(--navy);
+        }
+        .card h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: var(--navy);
+        }
+        .card p {
+            font-size: 13.5px;
+            color: var(--gray);
+            margin: 0 0 15px;
+        }
+        .btn {
+            background: var(--navy);
+            color: white;
+            padding: 10px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-align: center;
+            display: inline-block;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+        .btn-gold {
+            background: var(--gold);
+            color: var(--navy);
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray);
+            font-size: 12px;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>PERSONA RESEARCH & CONSULTING</h1>
+    <p>PORTAL LATIHAN INTERAKTIF PENALARAN MEKANIS & SPASIAL (TES RODA GILA TNI / POLRI / KEDINASAN)</p>
+</header>
+
+<div class="container">
+    <div class="intro-card">
+        <h2>Selamat Datang di Direktori Tryout Mandiri PRC</h2>
+        <p>
+            Halaman index utama ini mencakup seluruh modul latihan interaktif berbasis web standalone (offline-capable) 
+            beserta panduan materi PDF resmi untuk persiapan seleksi kedinasan dan TNI. Pilih modul latihan atau unduh materi di bawah ini.
+        </p>
+    </div>
+
+    <!-- MATERI PDF SECTION -->
+    <div class="section-title">📄 Materi & Panduan Modul Resmi</div>
+    <div class="card" style="margin-bottom: 25px;">
+        <h3>Panduan Lengkap Tes Roda Gila TNI & Polri (PDF)</h3>
+        <p>Modul materi lengkap beserta ilustrasi diagram asli, rumus cepat penalaran mekanis, dan ringkasan teori katrol & roda gigi.</p>
+        <div style="text-align: right;">
+            <a href="Materi_Panduan_Tes_Roda_Gila_TNI_Bergambar_Asli-v2.pdf" class="btn btn-gold" target="_blank">📥 Unduh / Buka File PDF</a>
+        </div>
+    </div>
+
+    <!-- TRYOUT INTERAKTIF SECTION -->
+    <div class="section-title">⚡ Modul Latihan Interaktif (Tryout Online 25 Soal A-E)</div>
+    
+    <div class="grid">
+        <!-- Tes 1 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 1</h3>
+                <p>Fokus latihan penalaran mekanis dasar: sabuk terbuka, roda gigi bersinggungan langsung, dan arah putaran.</p>
+            </div>
+            <a href="tes_roda_gila_1.html" class="btn" target="_blank">🚀 Buka Modul Seri 1</a>
+        </div>
+
+        <!-- Tes 2 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 2</h3>
+                <p>Latihan lanjutan sistem transmisi roda gigi bertingkat, sabuk bersilang, dan rasio putaran (RPM).</p>
+            </div>
+            <a href="tes_roda_gila_2.html" class="btn" target="_blank">🚀 Buka Modul Seri 2</a>
+        </div>
+
+        <!-- Tes 3 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 3</h3>
+                <p>Fokus khusus sistem katrol (pulley majemuk, katrol bergerak, blok katrol, dan diferensial mekanik).</p>
+            </div>
+            <a href="tes_roda_gila_3.html" class="btn" target="_blank">🚀 Buka Modul Seri 3</a>
+        </div>
+
+        <!-- Tes 4 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 4 (TNI)</h3>
+                <p>Paket latihan otentik soal TPA / TIU mekanikal seleksi prajurit TNI dengan pembahasan lengkap.</p>
+            </div>
+            <a href="tes_roda_gila_4.html" class="btn" target="_blank">🚀 Buka Modul Seri 4</a>
+        </div>
+
+        <!-- Tes 5 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 5 (TNI)</h3>
+                <p>Variasi tingkat lanjut roda gigi majemuk, planetary gear, puli bertingkat, dan sproket rantai.</p>
+            </div>
+            <a href="tes_roda_gila_5.html" class="btn" target="_blank">🚀 Buka Modul Seri 5</a>
+        </div>
+
+        <!-- Tes 6 -->
+        <div class="card">
+            <div>
+                <h3>Tes Roda Gila - Seri 6 (TNI)</h3>
+                <p>Konfigurasi kompleks: Planetary Differential, Multi-stage Reduction, Compound Dual Shaft, & Sprocket.</p>
+            </div>
+            <a href="tes_roda_gila_6.html" class="btn" target="_blank">🚀 Buka Modul Seri 6</a>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 Persona Research & Consulting (PRC). All Rights Reserved. | Hosted on GitHub Pages.
+</footer>
+
+</body>
+</html>

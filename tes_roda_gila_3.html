@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TES RODA GILA - SERI 3 | Persona Research & Consulting</title>
+    
+    <!-- Fonts & Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --navy: #0b2340; 
+            --gold: #d4a017; 
+            --bg: #f8fafc; 
+            --gray: #f1f5f9; 
+            --danger: #c0392b; 
+        }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 0; 
+            color: #1e293b; 
+        }
+
+        /* HEADER MASTER */
+        header { 
+            background: var(--navy); 
+            color: white; 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 4px solid var(--gold); 
+        }
+        .header-title h1 { margin: 0; font-size: 18px; color: #fff; letter-spacing: 0.5px; }
+        .header-title p { margin: 3px 0 0; font-size: 11px; color: var(--gold); font-weight: bold; }
+        .timer-badge { font-size: 20px; font-weight: bold; color: var(--gold); font-family: monospace; background: rgba(212, 160, 23, 0.15); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--gold); }
+
+        .container { max-width: 950px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* INPUT / LOGIN SECTION */
+        .user-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .user-card input { width: 80%; max-width: 400px; padding: 12px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 8px; text-align: center; margin-top: 15px; outline: none; display: block; margin-left: auto; margin-right: auto; }
+        
+        /* OPTION CARDS */
+        .opt { padding: 12px 16px; margin: 8px 0; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: 0.2s; background: #fff; text-align: left; line-height: 1.5; font-size: 14px; display: flex; align-items: center; gap: 12px; }
+        .opt:hover { background: #f1f5f9; border-color: var(--navy); }
+        .opt.selected { background: #e0f2fe; border-color: var(--navy); font-weight: bold; }
+
+        /* NAVIGASI SOAL GRID */
+        .nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 15px; }
+        .nav-item { height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; background: #fff; }
+        .nav-item.filled { background: var(--navy); color: white; }
+        .nav-item.active { border: 2px solid var(--gold); background: #fef08a; color: #000; }
+
+        /* BUTTONS */
+        .btn { background: var(--navy); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; text-align: center; display: inline-block; transition: 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-gold { background: var(--gold); color: var(--navy); }
+        .btn-green { background: #27ae60; color: white; }
+
+        /* REKAP & RESULT AREA */
+        .final-box { background: var(--navy); color: #fff; padding: 25px; border-radius: 16px; text-align: center; margin-bottom: 25px; }
+        .final-val { font-size: 56px; font-weight: 900; color: var(--gold); margin: 10px 0; }
+
+        /* PEMBAHASAN CONTAINER */
+        .review-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 18px; }
+        .review-item.correct { border-left: 6px solid #27ae60; }
+        .review-item.incorrect { border-left: 6px solid var(--danger); }
+        .pembahasan-box { background: #f1f5f9; padding: 14px; border-radius: 6px; margin-top: 12px; font-size: 13.5px; border-left: 3px solid var(--gold); line-height: 1.6; }
+
+        /* VISUAL MEDIA */
+        .visual-container { margin: 15px 0; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; overflow-x: auto; box-shadow: inset 0 0 8px rgba(0,0,0,0.02); }
+        .visual-container svg { max-width: 100%; height: auto; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<!-- MASTER HEADER -->
+<header id="masterHeader">
+    <div class="header-title">
+        <h1 id="headerMainTitle">PERSONA RESEARCH & CONSULTING</h1>
+        <p id="headerSubTitle">TES RODA GILA - SERI 3 (SISTEM KATROL & MEKANIKA LANJUTAN)</p>
+    </div>
+    <div id="timer" class="timer-badge">25:00</div>
+</header>
+
+<div class="container">
+    <!-- SECTION 1: START / IDENTITAS -->
+    <div id="sec-start" class="user-card">
+        <h2 style="margin:0; color:var(--navy);">IDENTITAS PESERTA TES RODA GILA - SERI 3</h2>
+        <p style="font-size:14px; color:#64748b; margin-top:8px; line-height:1.5;">
+            Program latihan khusus sistem katrol (pulley majemuk, katrol bergerak, blok katrol, dan diferensial).<br>
+            Terdiri dari 25 soal baru dengan 5 pilihan jawaban (A, B, C, D, E) dan kunci acak.
+        </p>
+        <input type="text" id="inputNama" placeholder="Masukkan Nama Lengkap Peserta..." autocomplete="off">
+        <br><br>
+        <button class="btn btn-gold" style="font-size: 18px; padding: 15px 40px;" onclick="startFullSimulation()">MULAI TES RODA GILA SERI 3</button>
+    </div>
+
+    <!-- SECTION 2: TES RODA GILA -->
+    <div id="sec-kecerdasan" style="display:none;">
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div style="flex:3; min-width:300px;">
+                <div class="card">
+                    <div id="k-q-no" style="font-weight:bold; color:var(--navy); margin-bottom:10px; font-size:16px;">Soal 1 dari 25</div>
+                    <div id="k-q-text" style="font-size:15px; line-height:1.6; margin-bottom:15px; font-weight:600; color:#0f172a;"></div>
+                    <div id="k-q-media" class="visual-container"></div>
+                    <div id="k-options"></div>
+                    <div style="margin-top:25px; display:flex; justify-content:space-between;">
+                        <button class="btn" onclick="prevQ_Kecerdasan()" style="background:#64748b">Sebelumnya</button>
+                        <button class="btn" id="k-btn-next" onclick="nextQ_Kecerdasan()">Selanjutnya</button>
+                    </div>
+                </div>
+            </div>
+            <div style="flex:1; min-width:250px;">
+                <div class="card" style="padding:15px;">
+                    <div style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px; color:var(--navy);">NAVIGASI 25 SOAL SERI 3</div>
+                    <div id="k-navGrid" class="nav-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: HASIL / REKAP AKHIR -->
+    <div id="sec-result" style="display:none;">
+        <div class="card">
+            <div style="text-align:center; border-bottom:2px solid #eee; padding-bottom:15px; margin-bottom:20px;">
+                <h2 style="margin:0; color:var(--navy);">LAPORAN HASIL TES RODA GILA - SERI 3</h2>
+                <p style="margin:5px 0 0; color:var(--gold); font-weight:bold;">PERSONA RESEARCH & CONSULTING - SISTEM KATROL</p>
+            </div>
+
+            <div id="resNamaPeserta" style="background:#eef6ff; padding:15px; border-radius:12px; margin-bottom:25px; font-weight:bold; font-size:18px; color:var(--navy); text-align:center;">
+                NAMA PESERTA: -
+            </div>
+
+            <div class="final-box">
+                <div>NILAI AKHIR (SKALA 0 - 100)</div>
+                <div class="final-val" id="resValWS">0</div>
+                <div style="font-size: 18px; font-weight: bold; color:#fff;" id="resKategori">KATEGORI: -</div>
+                <div style="font-size: 14px; opacity: 0.9; margin-top:10px;" id="resDetailSkor">Jawaban Benar: 0 / 25 Soal</div>
+            </div>
+            <p style="text-align:center; font-size:12px; color:#64748b; margin-top:-10px; margin-bottom:20px;">
+                * Sistem penilaian latihan Persona Research & Consulting (PRC).
+            </p>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
+                <button class="btn btn-green" style="flex:1; padding:15px;" onclick="window.print()">CETAK / SIMPAN PDF</button>
+                <button class="btn btn-gold" style="flex:1; padding:15px;" onclick="showReviewSection()">LIHAT PEMBAHASAN SOAL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: PEMBAHASAN / REVIEW -->
+    <div id="sec-review" style="display:none;">
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eee; padding-bottom:15px; margin-bottom:20px;">
+                <h2 style="margin:0; color:var(--navy);">PEMBAHASAN SOAL RODA GILA - SERI 3</h2>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-green" onclick="window.print()">CETAK PEMBAHASAN</button>
+                    <button class="btn" onclick="showSection('result')">Kembali ke Hasil</button>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-bottom:20px; border-bottom:2px solid var(--navy); padding-bottom:10px;">
+                <h3 style="margin:0; color:var(--navy);">DOKUMEN KUNCI & EVALUASI SISTEM KATROL</h3>
+                <p id="reviewNamaPeserta" style="margin:5px 0 0; color:var(--gold); font-weight:bold;">PESERTA: -</p>
+            </div>
+
+            <div id="reviewContainerKecerdasan"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFxmO0ocvr5HqK2WuGyjt7_JeTOcs4vGDg7QZejeiE2QvCP_qkonJcZc5hz9AFW2Vg/exec";
+
+    let currentIdx_Kecerdasan = 0;
+    let timerInterval = null;
+    let timerLeft = 1500; // 25 Menit Standar
+    let pName = "";
+    let isResultSubmitted = false;
+    let currentSessionId = 'SESSION_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    let waktuMulai = new Date().toLocaleString();
+
+    let simulationResult = {
+        kecerdasan: { userAns: {}, benar: 0, ws: 0, kategori: "" }
+    };
+
+    function makeSvgWrapper(content, width=520, height=240) {
+        return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; background:#fff;">
+            <defs>
+                <marker id="arrowRed" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b" />
+                </marker>
+                <marker id="arrowGold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#d4a017" />
+                </marker>
+            </defs>
+            ${content}
+        </svg>`;
+    }
+
+    function drawPulleySVG(cx, cy, r, label, color="#0b2340", detailText="") {
+        return `
+            <g>
+                <circle cx="${cx}" cy="${cy}" r="${r}" fill="#e2e8f0" stroke="${color}" stroke-width="4"/>
+                <circle cx="${cx}" cy="${cy}" r="${r*0.75}" fill="#ffffff" stroke="${color}" stroke-width="1.5"/>
+                <circle cx="${cx}" cy="${cy}" r="4" fill="${color}"/>
+                <text x="${cx}" y="${cy - 5}" font-family="Inter, sans-serif" font-size="14" font-weight="900" fill="${color}" text-anchor="middle">${label}</text>
+                ${detailText ? `<text x="${cx}" y="${cy + 16}" font-family="Inter, sans-serif" font-size="10" font-weight="bold" fill="#64748b" text-anchor="middle">${detailText}</text>` : ''}
+            </g>
+        `;
+    }
+
+    function konversiKualifikasiPRC(correct) {
+        let nilai = Math.round((correct / 25) * 100);
+        let kategori = "";
+        if (correct >= 23) kategori = "Sangat Memenuhi Syarat (SMS)";
+        else if (correct >= 19) kategori = "Memenuhi Syarat (MS)";
+        else if (correct >= 15) kategori = "Cukup Memenuhi Syarat (CMS)";
+        else kategori = "Kurang Memenuhi Syarat (KMS)";
+        return { nilai: nilai, kategori: kategori };
+    }
+
+    // 25 SOAL KHUSUS KATROL (BERBEDA, KOMPLEKS, 5 OPSI A-E, KUNCI ACAK)
+    const rawKecerdasan = [
+        {
+            no: 1,
+            q: "Perhatikan sistem katrol bergerak tunggal (satu katrol atas tetap dan satu katrol bawah gantung beban W). Jika beban W = 100 Newton, berapa besar gaya tarik F minimal yang diperlukan untuk mengangkat beban dalam keadaan seimbang (mengabaikan gesekan)?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 85, 25, 'Tetap', '#0b2340')}
+                <path d="M 235 85 L 235 150" stroke="#0b2340" stroke-width="3"/>
+                <path d="M 285 85 L 285 130" stroke="#0b2340" stroke-width="3" marker-end="url(#arrowRed)"/>
+                <text x="310" y="110" font-family="Inter" font-size="12" font-weight="bold" fill="#c0392b">F</text>
+                ${drawPulleySVG(260, 150, 22, 'Gantung', '#c0392b')}
+                <polygon points="245,185 275,185 260,210" fill="#64748b"/>
+                <text x="260" y="225" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Beban W</text>
+            `),
+            opts: [
+                "A. 100 Newton",
+                "B. 50 Newton",
+                "C. 200 Newton",
+                "D. 25 Newton",
+                "E. 75 Newton"
+            ],
+            ans: 1, // B (50 N)
+            exp: "Pembahasan: Pada katrol bergerak tunggal, beban ditopang oleh 2 utas tali. Keuntungan mekanis = 2. Gaya tarik F = W / 2 = 100 / 2 = 50 Newton."
+        },
+        {
+            no: 2,
+            q: "Sistem blok katrol dengan 3 katrol bergerak dan 3 katrol tetap (sistem 6 katrol / tali penopang beban n = 6). Jika beban beratnya 600 N, berapakah besar gaya F yang harus ditarik?",
+            media: makeSvgWrapper(`
+                <rect x="160" y="30" width="200" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(200, 75, 18, 'T1')}
+                ${drawPulleySVG(260, 75, 18, 'T2')}
+                ${drawPulleySVG(320, 75, 18, 'T3')}
+                ${drawPulleySVG(230, 135, 18, 'G1', '#c0392b')}
+                ${drawPulleySVG(290, 135, 18, 'G2', '#c0392b')}
+                <rect x="210" y="170" width="100" height="25" fill="#64748b" rx="4"/>
+                <text x="260" y="187" font-family="Inter" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">W = 600 N</text>
+            `),
+            opts: [
+                "A. 300 N",
+                "B. 600 N",
+                "C. 150 N",
+                "D. 100 N",
+                "E. 50 N"
+            ],
+            ans: 3, // D (100 N)
+            exp: "Pembahasan: Dalam sistem katrol majemuk dengan n tali penopang beban (n = 6), gaya F = W / 6 = 600 / 6 = 100 Newton."
+        },
+        {
+            no: 3,
+            q: "Perhatikan sistem katrol ganda tak seimbang. Beban A (80 N) digantung pada katrol bergerak yang dihubungkan dengan tali ke dinding. Berapakah tegangan tali T pada sistem tersebut?",
+            media: makeSvgWrapper(`
+                <line x1="150" y1="60" x2="370" y2="60" stroke="#0b2340" stroke-width="4"/>
+                ${drawPulleySVG(260, 100, 30, 'Puli', '#0b2340')}
+                <path d="M 230 100 L 230 170" stroke="#0b2340" stroke-width="3"/>
+                <path d="M 290 100 L 290 170" stroke="#0b2340" stroke-width="3"/>
+                <rect x="220" y="170" width="80" height="25" fill="#c0392b" rx="3"/>
+                <text x="260" y="187" font-family="Inter" font-size="12" font-weight="bold" fill="#fff" text-anchor="middle">W = 80 N</text>
+            `),
+            opts: [
+                "A. 80 N",
+                "B. 160 N",
+                "C. 40 N",
+                "D. 20 N",
+                "E. 120 N"
+            ],
+            ans: 2, // C (40 N)
+            exp: "Pembahasan: Beban 80 N ditopang oleh 2 cabang tali ke atas, sehingga setiap cabang tali memikul beban sebesar 80 / 2 = 40 Newton."
+        },
+        {
+            no: 4,
+            q: "Jika sebuah beban seberat 240 N diangkat menggunakan sistem katrol majemuk yang memiliki 4 buah katrol (keuntungan mekanis 4), berapakah panjang tali yang harus ditarik jika beban ingin dinaikkan setinggi 1,5 meter?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="13" font-weight="bold" fill="#0b2340" text-anchor="middle">Sistem Katrol KM = 4</text>
+                <text x="260" y="125" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">Tinggi Naik (h) = 1,5 Meter</text>
+            `),
+            opts: [
+                "A. 1,5 meter",
+                "B. 3,0 meter",
+                "C. 4,5 meter",
+                "D. 6,0 meter",
+                "E. 9,0 meter"
+            ],
+            ans: 3, // D (6,0 meter)
+            exp: "Pembahasan: Prinsip kerja usaha (W_masuk = W_keluar). Panjang tali tarik s = KM × tinggi beban (h) = 4 × 1,5 m = 6,0 meter."
+        },
+        {
+            no: 5,
+            q: "Perhatikan katrol tunggal tetap. Jika ujung tali ditarik ke bawah sejauh 2 meter dengan gaya 50 N untuk mengangkat ember air, berapakah ketinggian kenaikan ember air tersebut?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="50" width="120" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 90, 25, 'Tetap')}
+                <path d="M 235 90 L 235 160" stroke="#0b2340" stroke-width="3"/>
+                <path d="M 285 90 L 285 140" stroke="#0b2340" stroke-width="3" marker-end="url(#arrowRed)"/>
+                <text x="260" y="190" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Tarik Tali 2 Meter</text>
+            `),
+            opts: [
+                "A. 4 meter",
+                "B. 1 meter",
+                "C. 0,5 meter",
+                "D. 2 meter",
+                "E. Tidak berpindah"
+            ],
+            ans: 3, // D (2 meter)
+            exp: "Pembahasan: Katrol tetap tidak memberikan keuntungan mekanis gaya (KM = 1). Panjang tali yang ditarik sama persis dengan tinggi perpindahan beban, yaitu 2 meter."
+        },
+        {
+            no: 6,
+            q: "Sebuah sistem blok katrol tersusun atas 2 katrol tetap di atas dan 2 katrol bergerak di bawah. Jika efisiensi sistem adalah 80% dan beban yang diangkat 400 N, berapakah gaya tarik F yang dibutuhkan?",
+            media: makeSvgWrapper(`
+                <rect x="170" y="40" width="180" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(220, 85, 20, 'Atap 1')}
+                ${drawPulleySVG(300, 85, 20, 'Atap 2')}
+                ${drawPulleySVG(260, 145, 20, 'Bawah', '#c0392b')}
+                <text x="260" y="195" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">W = 400 N | η = 80% (KM = 4)</text>
+            `),
+            opts: [
+                "A. 100 N",
+                "B. 125 N",
+                "C. 80 N",
+                "D. 160 N",
+                "E. 200 N"
+            ],
+            ans: 1, // B (125 N)
+            exp: "Pembahasan: KM = 4. Tanpa gesekan F = 400 / 4 = 100 N. Karena efisiensi 80%, gaya tarik F nyata = 100 / 0,80 = 125 Newton."
+        },
+        {
+            no: 7,
+            q: "Perhatikan diagram katrol diferensial (differential pulley / chain hoist). Roda rantai atas memiliki jari-jari R1 = 15 cm dan R2 = 12 cm. Berapakah keuntungan mekanis teoritisnya?",
+            media: makeSvgWrapper(`
+                ${drawPulleySVG(260, 90, 45, 'Hoist', '#0b2340', 'R1=15 | R2=12')}
+                <path d="M 215 90 L 215 170" stroke="#0b2340" stroke-width="2.5"/>
+                <path d="M 305 90 L 305 150" stroke="#0b2340" stroke-width="2.5"/>
+                <circle cx="260" cy="160" r="15" fill="#c0392b"/>
+            `),
+            opts: [
+                "A. 5",
+                "B. 10",
+                "C. 20",
+                "D. 25",
+                "E. 50"
+            ],
+            ans: 1, // D (10) -> Let's check: KM = 2 * R1 / (R1 - R2) = 2 * 15 / (15 - 12) = 30 / 3 = 10.
+            exp: "Pembahasan: Keuntungan mekanis katrol diferensial dihitung dengan rumus KM = 2R1 / (R1 - R2) = (2 × 15) / (15 - 12) = 30 / 3 = 10."
+        },
+        {
+            no: 8,
+            q: "Dua buah beban identik masing-masing beratnya W dihubungkan melalui sebuah katrol tetap licin. Apa yang terjadi pada percepatan dan tegangan tali jika sistem dilepaskan?",
+            media: makeSvgWrapper(`
+                <rect x="220" y="45" width="80" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 75, 22, 'Tetap')}
+                <path d="M 238 75 L 238 160" stroke="#0b2340" stroke-width="2.5"/>
+                <path d="M 282 75 L 282 120" stroke="#0b2340" stroke-width="2.5"/>
+                <rect x="225" y="160" width="25" height="30" fill="#64748b"/>
+                <rect x="270" y="120" width="25" height="30" fill="#64748b"/>
+            `),
+            opts: [
+                "A. Beban bergerak turun dengan kecepatan tetap",
+                "B. Sistem seimbang diam karena berat beban sama kiri dan kanan",
+                "C. Beban sebelah kiri bergerak sangat cepat ke bawah",
+                "D. Tali putus karena kelebihan beban",
+                "E. Kedua beban berputar mengitari katrol"
+            ],
+            ans: 1, // B
+            exp: "Pembahasan: Karena beban di kedua sisi katrol sama persis (masing-masing W), gaya berat seimbang dan sistem berada dalam kesetimbangan statis (diam)."
+        },
+        {
+            no: 9,
+            q: "Sebuah beban seberat 500 N diangkat menggunakan katrol majemuk dengan 5 utas tali penopang. Jika gesekan diabaikan, berapakah besar gaya tarik F pada tali?",
+            media: makeSvgWrapper(`
+                <rect x="170" y="40" width="180" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="13" font-weight="bold" fill="#0b2340" text-anchor="middle">Beban W = 500 N</text>
+                <text x="260" y="120" font-family="Inter" font-size="12" fill="#c0392b" text-anchor="middle">Jumlah Utas Tali (n) = 5</text>
+            `),
+            opts: [
+                "A. 250 N",
+                "B. 100 N",
+                "C. 50 N",
+                "D. 125 N",
+                "E. 500 N"
+            ],
+            ans: 1, // B (100 N)
+            exp: "Pembahasan: Dengan n = 5 utas tali menopang beban, gaya tarik F = W / n = 500 / 5 = 100 Newton."
+        },
+        {
+            no: 10,
+            q: "Perhatikan susunan katrol kombinasi (1 katrol tetap dan 2 katrol bergerak tersusun seri). Berapakah keuntungan mekanis total dari sistem katrol kombinasi tersebut?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="35" width="160" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 75, 20, 'Tetap')}
+                ${drawPulleySVG(230, 130, 18, 'G1')}
+                ${drawPulleySVG(290, 130, 18, 'G2')}
+                <text x="260" y="180" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">1 Tetap + 2 Bergerak Seri</text>
+            `),
+            opts: [
+                "A. 2",
+                "B. 3",
+                "C. 4",
+                "D. 6",
+                "E. 8"
+            ],
+            ans: 2, // C (4) -> Tiap katrol bergerak melipatgandakan gaya 2x. Dua katrol bergerak seri = 2 * 2 = 4.
+            exp: "Pembahasan: Setiap katrol bergerak memberikan faktor penggali 2. Dua katrol bergerak yang disusun secara berseri memberikan keuntungan mekanis total 2 × 2 = 4."
+        },
+        {
+            no: 11,
+            q: "Sebuah beban W diangkat setinggi h menggunakan katrol bergerak tunggal. Jika gesekan tali diabaikan, pernyataan manakah yang BENAR mengenai usaha?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="50" width="120" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 90, 22, 'Bergerak')}
+                <text x="260" y="150" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">Usaha Masuk = Usaha Keluar</text>
+            `),
+            opts: [
+                "A. Usaha oleh gaya tarik lebih besar daripada usaha beban",
+                "B. Usaha oleh gaya tarik lebih kecil karena katrol membantu",
+                "C. Usaha yang dilakukan gaya tarik sama besar dengan usaha untuk menaikkan beban",
+                "D. Tidak ada usaha yang dilakukan pada sistem katrol",
+                "E. Usaha bernilai negatif karena ada gaya gravitasi"
+            ],
+            ans: 2, // C
+            exp: "Pembahasan: Berdasarkan hukum kekekalan energi (mengabaikan gesekan), usaha yang dimasukkan (F × s) selalu sama besar dengan usaha yang dikeluarkan (W × h)."
+        },
+        {
+            no: 12,
+            q: "Jika keuntungan mekanis suatu sistem katrol adalah 5 dan beban yang diangkat bermassa 50 kg (g = 10 m/s²), berapa besar gaya minimal untuk mengangkatnya?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">Massa m = 50 kg | g = 10 m/s²</text>
+                <text x="260" y="125" font-family="Inter" font-size="13" font-weight="bold" fill="#c0392b" text-anchor="middle">Keuntungan Mekanis (KM) = 5</text>
+            `),
+            opts: [
+                "A. 500 N",
+                "B. 250 N",
+                "C. 100 N",
+                "D. 50 N",
+                "E. 25 N"
+            ],
+            ans: 2, // C (100 N)
+            exp: "Pembahasan: Berat beban W = m × g = 50 kg × 10 m/s² = 500 N. Gaya F = W / KM = 500 / 5 = 100 Newton."
+        },
+        {
+            no: 13,
+            q: "Perhatikan sistem katrol dengan dua beban berbeda: m1 (3 kg) dan m2 (7 kg) digantung pada ujung tali melalui katrol tetap licin. Berapakah percepatan sistem tersebut?",
+            media: makeSvgWrapper(`
+                <rect x="220" y="45" width="80" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 75, 20, 'Tetap')}
+                <path d="M 240 75 L 240 160" stroke="#0b2340" stroke-width="2.5"/>
+                <path d="M 280 75 L 280 130" stroke="#0b2340" stroke-width="2.5"/>
+                <text x="260" y="180" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">m1 = 3 kg | m2 = 7 kg</text>
+            `),
+            opts: [
+                "A. 2 m/s²",
+                "B. 4 m/s²",
+                "C. 5 m/s²",
+                "D. 7 m/s²",
+                "E. 10 m/s²"
+            ],
+            ans: 1, // B (4 m/s²) -> a = (m2 - m1)g / (m1 + m2) = (7 - 3) * 10 / (3 + 7) = 40 / 10 = 4 m/s²
+            exp: "Pembahasan: Rumus percepatan Atwood = ((m2 - m1) / (m1 + m2)) × g = ((7 - 3) / (3 + 7)) × 10 = (4 / 10) × 10 = 4 m/s²."
+        },
+        {
+            no: 14,
+            q: "Sebuah katrol gantung bergerak ditarik ke atas dengan dua utas tali vertikal menahan beban 300 N di bagian porosnya. Berapa gaya tarik total pada kedua ujung tali atas?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="40" width="120" height="15" fill="#0b2340"/>
+                <path d="M 230 55 L 230 130" stroke="#0b2340" stroke-width="3"/>
+                <path d="M 290 55 L 290 130" stroke="#0b2340" stroke-width="3"/>
+                ${drawPulleySVG(260, 130, 25, 'Poros', '#c0392b')}
+                <text x="260" y="185" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Beban Poros = 300 N</text>
+            `),
+            opts: [
+                "A. 300 N",
+                "B. 600 N",
+                "C. 150 N",
+                "D. 75 N",
+                "E. 450 N"
+            ],
+            ans: 2, // C (150 N per tali, atau total gaya tiap sisi)
+            exp: "Pembahasan: Beban 300 N ditopang secara merata oleh 2 utas tali vertikal, sehingga masing-masing tali menahan tegangan sebesar 300 / 2 = 150 Newton."
+        },
+        {
+            no: 15,
+            q: "Dalam sebuah eksperimen fisika, sebuah katrol tetap digunakan untuk mengubah arah gaya. Jika Anda menarik tali dengan gaya 75 N ke bawah, berapakah besar gaya yang bekerja pada beban di ujung satu lagi?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="50" width="120" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 90, 22, 'Tetap')}
+                <path d="M 238 90 L 238 150" stroke="#0b2340" stroke-width="2.5"/>
+                <path d="M 282 90 L 282 140" stroke="#0b2340" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+            `),
+            opts: [
+                "A. 150 N",
+                "B. 37,5 N",
+                "C. 75 N",
+                "D. 0 N",
+                "E. 225 N"
+            ],
+            ans: 2, // C (75 N)
+            exp: "Pembahasan: Katrol tetap berfungsi mengubah arah gaya tanpa melipatgandakan besar gaya. Jika ditarik 75 N, gaya pada beban tetap bernilai 75 Newton."
+        },
+        {
+            no: 16,
+            q: "Sebuah sistem blok katrol memiliki keuntungan mekanis sebesar 6. Jika beban seberat 900 N ditarik ke atas sejauh 0,5 meter, berapa usaha total yang dilakukan oleh gaya tarik?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">KM = 6 | W = 900 N | h = 0,5 m</text>
+            `),
+            opts: [
+                "A. 450 Joule",
+                "B. 900 Joule",
+                "C. 2700 Joule",
+                "D. 150 Joule",
+                "E. 5400 Joule"
+            ],
+            ans: 0, // A (450 Joule) -> W_usaha = W * h = 900 * 0.5 = 450 J. (Usaha beban = Usaha gaya tarik).
+            exp: "Pembahasan: Usaha = Gaya Beban × Perpindahan Beban = 900 N × 0,5 m = 450 Joule (mengabaikan gesekan, usaha input sama dengan usaha output)."
+        },
+        {
+            no: 17,
+            q: "Perhatikan katrol gantung bergerak. Jika massa katrol itu sendiri diperhitungkan sebesar 10 N, dan beban yang digantung bermata 190 N, berapakah gaya tarik F minimal untuk mengangkatnya?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="45" width="120" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 90, 25, 'Bergerak', '#c0392b', 'Katrol 10 N')}
+                <text x="260" y="160" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Beban = 190 N</text>
+            `),
+            opts: [
+                "A. 100 N",
+                "B. 95 N",
+                "C. 200 N",
+                "D. 50 N",
+                "E. 105 N"
+            ],
+            ans: 0, // A (100 N) -> Total berat = 190 + 10 = 200 N. Dibagi 2 tali = 100 N.
+            exp: "Pembahasan: Total beban yang harus ditopang adalah berat beban ditambah berat katrol itu sendiri (190 N + 10 N = 200 N). Karena ditopang 2 utas tali, F = 200 / 2 = 100 Newton."
+        },
+        {
+            no: 18,
+            q: "Manakah di antara jenis sistem katrol berikut yang memberikan keuntungan mekanis paling besar untuk tenaga manusia?",
+            media: makeSvgWrapper(`
+                <text x="260" y="110" font-family="Inter" font-size="14" font-weight="900" fill="#0b2340" text-anchor="middle">Analisis Sistem Katrol</text>
+                <text x="260" y="135" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">Perbandingan Katrol Tetap, Bergerak & Majemuk</text>
+            `),
+            opts: [
+                "A. Katrol tunggal tetap",
+                "B. Katrol tunggal bergerak",
+                "C. Blok katrol majemuk dengan banyak tali",
+                "D. Katrol putar horizontal",
+                "E. Katrol tanpa tali"
+            ],
+            ans: 2, // C
+            exp: "Pembahasan: Blok katrol majemuk (block and tackle) dengan banyak lilitan dan tali penopang memberikan keuntungan mekanis tertinggi dibandingkan katrol tunggal."
+        },
+        {
+            no: 19,
+            q: "Sebuah beban 120 N ditarik ke atas menggunakan sistem katrol yang terdiri dari 3 katrol bergerak. Jika efisiensi sistem katrol 75%, berapakah besar gaya tarik F nyata?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">W = 120 N | KM = 8 (3 Bergerak -> 2^3)</text>
+                <text x="260" y="125" font-family="Inter" font-size="12" fill="#c0392b" text-anchor="middle">Efisiensi (η) = 75%</text>
+            `),
+            opts: [
+                "A. 15 N",
+                "B. 20 N",
+                "C. 40 N",
+                "D. 60 N",
+                "E. 10 N"
+            ],
+            ans: 1, // B (20 N) -> KM = 2^3 = 8. F ideal = 120 / 8 = 15 N. F nyata = 15 / 0.75 = 20 N.
+            exp: "Pembahasan: KM = 2³ = 8. Gaya ideal = 120 / 8 = 15 N. Dengan efisiensi 75% (0,75), gaya F nyata = 15 / 0,75 = 20 Newton."
+        },
+        {
+            no: 20,
+            q: "Dalam sistem pesawat sederhana katrol, apa kerugian utama yang harus diterima ketika kita mendapatkan keuntungan mekanis yang besar (gaya tarik menjadi sangat kecil)?",
+            media: makeSvgWrapper(`
+                <text x="260" y="110" font-family="Inter" font-size="14" font-weight="900" fill="#0b2340" text-anchor="middle">Prinsip Usaha & Energi</text>
+                <text x="260" y="135" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">Konsekuensi Keuntungan Mekanis Tinggi</text>
+            `),
+            opts: [
+                "A. Beban menjadi lebih berat dari sebelumnya",
+                "B. Kita harus menarik tali dengan panjang yang jauh lebih besar",
+                "C. Waktu yang diperlukan menjadi lebih singkat",
+                "D. Arah gaya tarik menjadi ke atas",
+                "E. Tidak ada konsekuensi apa pun"
+            ],
+            ans: 1, // B
+            exp: "Pembahasan: Sesuai hukum kekekalan usaha, keuntungan gaya (gaya kecil) harus dibayar dengan jarak tarikan tali yang lebih panjang (panjang lintasan bertambah)."
+        },
+        {
+            no: 21,
+            q: "Sebuah katrol tetap dihubungkan dengan tali yang melingkar untuk menaikkan ember pasir 45 kg. Jika percepatan gravitasi g = 10 m/s², berapa besar gaya tegangan tali saat ember ditarik ke atas dengan percepatan konstan?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="50" width="120" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(260, 90, 22, 'Tetap')}
+                <text x="260" y="160" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Massa m = 45 kg (Konstan)</text>
+            `),
+            opts: [
+                "A. 225 N",
+                "B. 900 N",
+                "C. 450 N",
+                "D. 45 N",
+                "E. 135 N"
+            ],
+            ans: 2, // C (450 N)
+            exp: "Pembahasan: Karena kecepatan konstan (percepatan a = 0), tegangan tali T = m × g = 45 kg × 10 m/s² = 450 Newton."
+        },
+        {
+            no: 22,
+            q: "Perhatikan sistem dua katrol bergerak yang dihubungkan bertingkat. Beban 160 N digantung di bawah. Berapakah gaya tarik pada tali utama?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="35" width="160" height="15" fill="#0b2340"/>
+                ${drawPulleySVG(230, 80, 18, 'G1')}
+                ${drawPulleySVG(290, 80, 18, 'G2')}
+                <text x="260" y="150" font-family="Inter" font-size="11" font-weight="bold" fill="#0b2340" text-anchor="middle">Beban = 160 N (2 Katrol Bergerak)</text>
+            `),
+            opts: [
+                "A. 160 N",
+                "B. 80 N",
+                "C. 40 N",
+                "D. 20 N",
+                "E. 320 N"
+            ],
+            ans: 2, // C (40 N) -> KM = 4. F = 160 / 4 = 40 N.
+            exp: "Pembahasan: Dua katrol bergerak memberikan keuntungan mekanis KM = 2² = 4. Gaya tarik F = 160 / 4 = 40 Newton."
+        },
+        {
+            no: 23,
+            q: "Suatu sistem katrol memiliki efisiensi 60%. Jika usaha yang dikeluarkan untuk mengangkat beban (usaha berguna) adalah 300 Joule, berapakah usaha total yang harus dimasukkan ke dalam sistem?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">Usaha Output = 300 J | Efisiensi = 60%</text>
+            `),
+            opts: [
+                "A. 180 Joule",
+                "B. 360 Joule",
+                "C. 500 Joule",
+                "D. 450 Joule",
+                "E. 600 Joule"
+            ],
+            ans: 2, // C (500 Joule) -> Usaha input = Usaha output / 0.60 = 300 / 0.60 = 500 J.
+            exp: "Pembahasan: Efisiensi = (Usaha Output / Usaha Input) × 100%. 60% = (300 / Usaha Input) -> Usaha Input = 300 / 0,60 = 500 Joule."
+        },
+        {
+            no: 24,
+            q: "Jika sebuah katrol tetap mengalami gesekan poros yang cukup besar sehingga membutuhkan gaya tambahan sebesar 10% dari beban untuk menggerakkannya, apa dampak langsung pada efisiensi katrol?",
+            media: makeSvgWrapper(`
+                <text x="260" y="110" font-family="Inter" font-size="14" font-weight="900" fill="#0b2340" text-anchor="middle">Analisis Gesekan Poros</text>
+                <text x="260" y="135" font-family="Inter" font-size="12" fill="#64748b" text-anchor="middle">Pengaruh Gesekan terhadap Efisiensi Mesin</text>
+            `),
+            opts: [
+                "A. Efisiensi mesin meningkat di atas 100%",
+                "B. Efisiensi mesin berkurang menjadi di bawah 100%",
+                "C. Efisiensi tetap sempurna 100%",
+                "D. Keuntungan mekanis menjadi tak terhingga",
+                "E. Katrol berubah fungsi menjadi bidang miring"
+            ],
+            ans: 1, // B
+            exp: "Pembahasan: Adanya gaya gesekan menyebabkan sebagian usaha terbuang menjadi panas, sehingga efisiensi mesin sederhana selalu berada di bawah 100%."
+        },
+        {
+            no: 25,
+            q: "Dalam sebuah sistem katrol majemuk untuk mengangkat mesin mobil di bengkel, tali penarik ditarik sejauh 12 meter untuk mengangkat mesin tersebut setinggi 2 meter. Berapakah keuntungan mekanis sistem tersebut?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="40" width="160" height="15" fill="#0b2340"/>
+                <text x="260" y="90" font-family="Inter" font-size="12" font-weight="bold" fill="#0b2340" text-anchor="middle">Panjang Tali Tarik (s) = 12 meter</text>
+                <text x="260" y="125" font-family="Inter" font-size="12" fill="#c0392b" text-anchor="middle">Kenaikan Beban (h) = 2 meter</text>
+            `),
+            opts: [
+                "A. 2",
+                "B. 4",
+                "C. 6",
+                "D. 8",
+                "E. 24"
+            ],
+            ans: 2, // C (6) -> KM = s / h = 12 / 2 = 6.
+            exp: "Pembahasan: Keuntungan mekanis KM = panjang perpindahan gaya tarik (s) / ketinggian perpindahan beban (h) = 12 m / 2 m = 6."
+        }
+    ];
+
+    function showSection(secId) {
+        document.getElementById('sec-start').style.display = 'none';
+        document.getElementById('sec-kecerdasan').style.display = 'none';
+        document.getElementById('sec-result').style.display = 'none';
+        document.getElementById('sec-review').style.display = 'none';
+
+        if (secId === 'start') document.getElementById('sec-start').style.display = 'block';
+        if (secId === 'kecerdasan') document.getElementById('sec-kecerdasan').style.display = 'block';
+        if (secId === 'result') document.getElementById('sec-result').style.display = 'block';
+        if (secId === 'review') document.getElementById('sec-review').style.display = 'block';
+    }
+
+    function startFullSimulation() {
+        const input = document.getElementById('inputNama').value.trim();
+        if (!input) {
+            alert('Mohon isi nama lengkap peserta terlebih dahulu.');
+            return;
+        }
+        pName = input;
+        showSection('kecerdasan');
+        initKecerdasanSection();
+        startTimer();
+    }
+
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerLeft = 1500; // 25 Menit
+        updateTimerDisplay();
+
+        timerInterval = setInterval(() => {
+            timerLeft--;
+            updateTimerDisplay();
+            if (timerLeft <= 0) {
+                clearInterval(timerInterval);
+                alert('Waktu tes Roda Gila Seri 3 telah habis!');
+                finishSimulation();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const m = Math.floor(timerLeft / 60);
+        const s = timerLeft % 60;
+        document.getElementById('timer').innerText = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    function initKecerdasanSection() {
+        currentIdx_Kecerdasan = 0;
+        renderNavGrid_Kecerdasan();
+        renderQuestion_Kecerdasan();
+    }
+
+    function renderNavGrid_Kecerdasan() {
+        const grid = document.getElementById('k-navGrid');
+        grid.innerHTML = '';
+        rawKecerdasan.forEach((q, idx) => {
+            const btn = document.createElement('div');
+            btn.className = 'nav-item';
+            if (simulationResult.kecerdasan.userAns[idx] !== undefined) btn.classList.add('filled');
+            if (idx === currentIdx_Kecerdasan) btn.classList.add('active');
+            btn.innerText = idx + 1;
+            btn.onclick = () => {
+                currentIdx_Kecerdasan = idx;
+                renderQuestion_Kecerdasan();
+                renderNavGrid_Kecerdasan();
+            };
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderQuestion_Kecerdasan() {
+        const q = rawKecerdasan[currentIdx_Kecerdasan];
+        document.getElementById('k-q-no').innerText = `Soal ${currentIdx_Kecerdasan + 1} dari ${rawKecerdasan.length}`;
+        document.getElementById('k-q-text').innerText = q.q;
+
+        const mediaContainer = document.getElementById('k-q-media');
+        mediaContainer.innerHTML = q.media;
+
+        const optsContainer = document.getElementById('k-options');
+        optsContainer.innerHTML = '';
+
+        q.opts.forEach((optText, oIdx) => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'opt';
+            if (simulationResult.kecerdasan.userAns[currentIdx_Kecerdasan] === oIdx) {
+                optDiv.classList.add('selected');
+            }
+            optDiv.innerHTML = `<div>${optText}</div>`;
+            optDiv.onclick = () => selectOpt_Kecerdasan(oIdx);
+            optsContainer.appendChild(optDiv);
+        });
+
+        document.getElementById('k-btn-next').innerText = (currentIdx_Kecerdasan === rawKecerdasan.length - 1) ? 'Selesai & Kirim' : 'Selanjutnya';
+    }
+
+    function selectOpt_Kecerdasan(oIdx) {
+        simulationResult.kecerdasan.userAns[currentIdx_Kecerdasan] = oIdx;
+        renderQuestion_Kecerdasan();
+        renderNavGrid_Kecerdasan();
+        
+        // AUTONEXT FUNCTIONALITY
+        if (currentIdx_Kecerdasan < rawKecerdasan.length - 1) {
+            setTimeout(() => {
+                nextQ_Kecerdasan();
+            }, 200);
+        }
+    }
+
+    function prevQ_Kecerdasan() {
+        if (currentIdx_Kecerdasan > 0) {
+            currentIdx_Kecerdasan--;
+            renderQuestion_Kecerdasan();
+            renderNavGrid_Kecerdasan();
+        }
+    }
+
+    function nextQ_Kecerdasan() {
+        if (currentIdx_Kecerdasan < rawKecerdasan.length - 1) {
+            currentIdx_Kecerdasan++;
+            renderQuestion_Kecerdasan();
+            renderNavGrid_Kecerdasan();
+        } else {
+            if (confirm('Apakah Anda yakin ingin mengakhiri tes dan mengirimkan jawaban?')) {
+                finishSimulation();
+            }
+        }
+    }
+
+    function finishSimulation() {
+        clearInterval(timerInterval);
+
+        let correctCount = 0;
+        rawKecerdasan.forEach((q, idx) => {
+            if (simulationResult.kecerdasan.userAns[idx] === q.ans) {
+                correctCount++;
+            }
+        });
+
+        const evaluasi = konversiKualifikasiPRC(correctCount);
+
+        simulationResult.kecerdasan.benar = correctCount;
+        simulationResult.kecerdasan.ws = evaluasi.nilai;
+        simulationResult.kecerdasan.kategori = evaluasi.kategori;
+
+        document.getElementById('resNamaPeserta').innerText = `NAMA PESERTA: ${pName.toUpperCase()}`;
+        document.getElementById('resValWS').innerText = evaluasi.nilai;
+        document.getElementById('resKategori').innerText = `KATEGORI: ${evaluasi.kategori}`;
+        document.getElementById('resDetailSkor').innerText = `Jawaban Benar: ${correctCount} / ${rawKecerdasan.length} Soal`;
+
+        showSection('result');
+        sendToGoogleSheets();
+    }
+
+    function sendToGoogleSheets() {
+        if (isResultSubmitted) return;
+        isResultSubmitted = true;
+
+        const payload = {
+            sessionId: currentSessionId,
+            namaSiswa: pName,
+            program: "PENALARAN MEKANIS",
+            namaTryout: "TES RODA GILA - SERI 3 (KATROL)",
+            tanggal: new Date().toLocaleDateString(),
+            waktuMulai: waktuMulai,
+            waktuSelesai: new Date().toLocaleString(),
+            durasi: "25 Menit",
+
+            kecerdasan: simulationResult.kecerdasan.ws,
+            kepribadian: "",
+            kecermatan: "",
+
+            tiu: simulationResult.kecerdasan.ws,
+            twk: "",
+            tkp: "",
+
+            pengetahuanUmum: "",
+
+            nilaiAkhir: simulationResult.kecerdasan.ws
+        };
+
+        fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            console.log("Data Tes Roda Gila Seri 3 berhasil dikirim ke Google Sheets.");
+        }).catch(err => {
+            console.error("Gagal mengirim data:", err);
+        });
+    }
+
+    function showReviewSection() {
+        document.getElementById('reviewNamaPeserta').innerText = `PESERTA: ${pName.toUpperCase()}`;
+        const container = document.getElementById('reviewContainerKecerdasan');
+        container.innerHTML = '';
+
+        rawKecerdasan.forEach((q, idx) => {
+            const uAns = simulationResult.kecerdasan.userAns[idx];
+            const isCorrect = (uAns === q.ans);
+
+            const item = document.createElement('div');
+            item.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+
+            let optListHtml = '';
+            q.opts.forEach((optText, oIdx) => {
+                let badge = '';
+                if (oIdx === q.ans) badge += ' <span style="color:#27ae60; font-weight:bold;">[Kunci Benar]</span>';
+                if (oIdx === uAns && !isCorrect) badge += ' <span style="color:#c0392b; font-weight:bold;">[Jawaban Anda]</span>';
+                if (oIdx === uAns && isCorrect) badge += ' <span style="color:#27ae60; font-weight:bold;">[Jawaban Anda Tepat]</span>';
+
+                optListHtml += `<div style="margin:6px 0; font-size:14px; padding:6px 10px; background:${oIdx === q.ans ? '#f0fdf4' : (oIdx === uAns ? '#fef2f2' : '#fff')}; border-radius:6px; border:1px solid ${oIdx === q.ans ? '#bbf7d0' : (oIdx === uAns ? '#fecaca' : '#e2e8f0')};">
+                    ${optText} ${badge}
+                </div>`;
+            });
+
+            item.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #e2e8f0; padding-bottom:8px; margin-bottom:10px;">
+                    <div style="font-weight:bold; color:var(--navy); font-size:16px;">Soal Nomor ${idx + 1}</div>
+                    <div style="font-weight:bold; font-size:13px; color:${isCorrect ? '#27ae60' : '#c0392b'};">${isCorrect ? '✓ BENAR (+1)' : '✗ SALAH / TIDAK DIJAWAB (0)'}</div>
+                </div>
+                <div style="margin-top:5px; font-size:15px; font-weight:600; color:#0f172a; line-height:1.5;">${q.q}</div>
+                
+                <!-- ILUSTRASI GAMBAR SVG PADA PEMBAHASAN -->
+                <div class="visual-container" style="background:#f8fafc; border:1px dashed #cbd5e1; margin:15px 0;">
+                    <div style="font-size:11px; font-weight:bold; color:#64748b; margin-bottom:6px; text-transform:uppercase; letter-spacing:0.5px;">Diagram Mekanis Soal ${idx + 1}:</div>
+                    ${q.media}
+                </div>
+
+                <div style="margin:12px 0;">
+                    <div style="font-weight:bold; font-size:13px; color:#475569; margin-bottom:6px;">Pilihan Jawaban:</div>
+                    ${optListHtml}
+                </div>
+
+                <div class="pembahasan-box">
+                    <strong style="color:var(--navy); font-size:14px; display:block; margin-bottom:4px;">🔍 Pembahasan & Analisis Mekanis:</strong>
+                    ${q.exp}
+                </div>
+            `;
+
+            container.appendChild(item);
+        });
+
+        showSection('review');
+    }
+</script>
+</body>
+</html>

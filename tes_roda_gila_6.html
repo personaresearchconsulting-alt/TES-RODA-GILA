@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TES RODA GILA SERI 3 - LATIHAN PENALARAN MEKANIS TNI | Persona Research & Consulting</title>
+    
+    <!-- Fonts & Libraries -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+    <style>
+        :root { 
+            --navy: #0b2340; 
+            --gold: #d4a017; 
+            --bg: #f8fafc; 
+            --gray: #f1f5f9; 
+            --danger: #c0392b; 
+        }
+        * { box-sizing: border-box; }
+        body { 
+            font-family: 'Inter', 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            margin: 0; 
+            padding: 0; 
+            color: #1e293b; 
+        }
+
+        /* HEADER MASTER */
+        header { 
+            background: var(--navy); 
+            color: white; 
+            padding: 15px 5%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 4px solid var(--gold); 
+        }
+        .header-title h1 { margin: 0; font-size: 18px; color: #fff; letter-spacing: 0.5px; }
+        .header-title p { margin: 3px 0 0; font-size: 11px; color: var(--gold); font-weight: bold; }
+        .timer-badge { font-size: 20px; font-weight: bold; color: var(--gold); font-family: monospace; background: rgba(212, 160, 23, 0.15); padding: 4px 12px; border-radius: 6px; border: 1px solid var(--gold); }
+
+        .container { max-width: 980px; margin: 20px auto; padding: 0 15px; }
+        .card { background: white; padding: 25px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+
+        /* INPUT / LOGIN SECTION */
+        .user-card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: center; }
+        .user-card input { width: 80%; max-width: 400px; padding: 12px; font-size: 16px; border: 2px solid #cbd5e1; border-radius: 8px; text-align: center; margin-top: 15px; outline: none; display: block; margin-left: auto; margin-right: auto; }
+        
+        /* OPTION CARDS */
+        .opt { padding: 12px 16px; margin: 8px 0; border: 2px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: 0.2s; background: #fff; text-align: left; line-height: 1.5; font-size: 14px; display: flex; align-items: center; gap: 12px; }
+        .opt:hover { background: #f1f5f9; border-color: var(--navy); }
+        .opt.selected { background: #e0f2fe; border-color: var(--navy); font-weight: bold; }
+
+        /* NAVIGASI SOAL GRID */
+        .nav-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 15px; }
+        .nav-item { height: 35px; display: flex; align-items: center; justify-content: center; border: 1px solid #cbd5e1; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: bold; background: #fff; line-height: 35px; text-align: center; }
+        .nav-item.filled { background: var(--navy); color: white; }
+        .nav-item.active { border: 2px solid var(--gold); background: #fef08a; color: #000; }
+
+        /* BUTTONS */
+        .btn { background: var(--navy); color: white; border: none; padding: 12px 24px; border-radius: 8px; cursor: pointer; font-weight: bold; text-decoration: none; text-align: center; display: inline-block; transition: 0.2s; }
+        .btn:hover { opacity: 0.9; }
+        .btn-gold { background: var(--gold); color: var(--navy); }
+        .btn-green { background: #27ae60; color: white; }
+
+        /* REKAP & RESULT AREA */
+        .final-box { background: var(--navy); color: #fff; padding: 25px; border-radius: 16px; text-align: center; margin-bottom: 25px; }
+        .final-val { font-size: 56px; font-weight: 900; color: var(--gold); margin: 10px 0; }
+
+        /* PEMBAHASAN CONTAINER */
+        .review-item { background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; padding: 18px; margin-bottom: 18px; }
+        .review-item.correct { border-left: 6px solid #27ae60; }
+        .review-item.incorrect { border-left: 6px solid var(--danger); }
+        .pembahasan-box { background: #f1f5f9; padding: 14px; border-radius: 6px; margin-top: 12px; font-size: 13.5px; border-left: 3px solid var(--gold); line-height: 1.6; }
+
+        /* VISUAL MEDIA */
+        .visual-container { margin: 15px 0; text-align: center; background: #ffffff; border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; overflow-x: auto; box-shadow: inset 0 0 8px rgba(0,0,0,0.02); }
+        .visual-container svg { max-width: 100%; height: auto; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<!-- MASTER HEADER -->
+<header id="masterHeader">
+    <div class="header-title">
+        <h1 id="headerMainTitle">PERSONA RESEARCH & CONSULTING</h1>
+        <p id="headerSubTitle">TES RODA GILA (SERI 3) - LATIHAN PENALARAN MEKANIS TNI</p>
+    </div>
+    <div id="timer" class="timer-badge">25:00</div>
+</header>
+
+<div class="container">
+    <!-- SECTION 1: START / IDENTITAS -->
+    <div id="sec-start" class="user-card">
+        <h2 style="margin:0; color:var(--navy);">IDENTITAS PESERTA TES RODA GILA (SERI 3)</h2>
+        <p style="font-size:14px; color:#64748b; margin-top:8px; line-height:1.5;">
+            Program latihan penalaran mekanis tingkat lanjutan untuk persiapan seleksi TNI.<br>
+            Menyajikan 25 konfigurasi baru: Planetary Differential, Multi-stage Reduction, Compound Dual Shaft, dan Sprocket Chains.
+        </p>
+        <input type="text" id="inputNama" placeholder="Masukkan Nama Lengkap Peserta..." autocomplete="off">
+        <br><br>
+        <button class="btn btn-gold" style="font-size: 18px; padding: 15px 40px;" onclick="startFullSimulation()">MULAI TES SERI 3</button>
+    </div>
+
+    <!-- SECTION 2: TES RODA GILA -->
+    <div id="sec-kecerdasan" style="display:none;">
+        <div style="display:flex; gap:20px; flex-wrap:wrap;">
+            <div style="flex:3; min-width:300px;">
+                <div class="card">
+                    <div id="k-q-no" style="font-weight:bold; color:var(--navy); margin-bottom:10px; font-size:16px;">Soal 1 dari 25</div>
+                    <div id="k-q-text" style="font-size:15px; line-height:1.6; margin-bottom:15px; font-weight:600; color:#0f172a;"></div>
+                    <div id="k-q-media" class="visual-container"></div>
+                    <div id="k-options"></div>
+                    <div style="margin-top:25px; display:flex; justify-content:space-between;">
+                        <button class="btn" onclick="prevQ_Kecerdasan()" style="background:#64748b">Sebelumnya</button>
+                        <button class="btn" id="k-btn-next" onclick="nextQ_Kecerdasan()">Selanjutnya</button>
+                    </div>
+                </div>
+            </div>
+            <div style="flex:1; min-width:250px;">
+                <div class="card" style="padding:15px;">
+                    <div style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px; color:var(--navy);">NAVIGASI 25 SOAL SERI 3</div>
+                    <div id="k-navGrid" class="nav-grid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: HASIL / REKAP AKHIR -->
+    <div id="sec-result" style="display:none;">
+        <div class="card">
+            <div style="text-align:center; border-bottom:2px solid #eee; padding-bottom:15px; margin-bottom:20px;">
+                <h2 style="margin:0; color:var(--navy);">LAPORAN HASIL TES RODA GILA (SERI 3)</h2>
+                <p style="margin:5px 0 0; color:var(--gold); font-weight:bold;">PERSONA RESEARCH & CONSULTING - PENALARAN MEKANIS TNI</p>
+            </div>
+
+            <div id="resNamaPeserta" style="background:#eef6ff; padding:15px; border-radius:12px; margin-bottom:25px; font-weight:bold; font-size:18px; color:var(--navy); text-align:center;">
+                NAMA PESERTA: -
+            </div>
+
+            <div class="final-box">
+                <div>NILAI AKHIR (SKALA 0 - 100)</div>
+                <div class="final-val" id="resValWS">0</div>
+                <div style="font-size: 18px; font-weight: bold; color:#fff;" id="resKategori">KATEGORI: -</div>
+                <div style="font-size: 14px; opacity: 0.9; margin-top:10px;" id="resDetailSkor">Jawaban Benar: 0 / 25 Soal</div>
+            </div>
+            <p style="text-align:center; font-size:12px; color:#64748b; margin-top:-10px; margin-bottom:20px;">
+                * Sistem penilaian latihan Persona Research & Consulting (PRC) untuk seleksi TNI.
+            </p>
+
+            <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:20px;">
+                <button class="btn btn-green" style="flex:1; padding:15px;" onclick="window.print()">CETAK / SIMPAN PDF</button>
+                <button class="btn btn-gold" style="flex:1; padding:15px;" onclick="showReviewSection()">LIHAT PEMBAHASAN SOAL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: PEMBAHASAN / REVIEW -->
+    <div id="sec-review" style="display:none;">
+        <div class="card">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:2px solid #eee; padding-bottom:15px; margin-bottom:20px;">
+                <h2 style="margin:0; color:var(--navy);">PEMBAHASAN SOAL RODA GILA (SERI 3)</h2>
+                <div style="display:flex; gap:10px;">
+                    <button class="btn btn-green" onclick="window.print()">CETAK PEMBAHASAN</button>
+                    <button class="btn" onclick="showSection('result')">Kembali ke Hasil</button>
+                </div>
+            </div>
+            
+            <div style="text-align:center; margin-bottom:20px; border-bottom:2px solid var(--navy); padding-bottom:10px;">
+                <h3 style="margin:0; color:var(--navy);">DOKUMEN KUNCI & EVALUASI PENALARAN MEKANIS TNI</h3>
+                <p id="reviewNamaPeserta" style="margin:5px 0 0; color:var(--gold); font-weight:bold;">PESERTA: -</p>
+            </div>
+
+            <div id="reviewContainerKecerdasan"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyFxmO0ocvr5HqK2WuGyjt7_JeTOcs4vGDg7QZejeiE2QvCP_qkonJcZc5hz9AFW2Vg/exec";
+
+    let currentIdx_Kecerdasan = 0;
+    let timerInterval = null;
+    let timerLeft = 1500; // 25 Menit Standar
+    let pName = "";
+    let isResultSubmitted = false;
+    let currentSessionId = 'SESSION_S3_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    let waktuMulai = new Date().toLocaleString();
+
+    let simulationResult = {
+        kecerdasan: { userAns: {}, benar: 0, ws: 0, kategori: "" }
+    };
+
+    function makeSvgWrapper(content, width=550, height=260) {
+        return `<svg width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg" style="vertical-align:middle; background:#fff;">
+            <defs>
+                <marker id="arrowRed" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#c0392b" />
+                </marker>
+                <marker id="arrowGold" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#d4a017" />
+                </marker>
+                <marker id="arrowNavy" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z" fill="#0b2340" />
+                </marker>
+            </defs>
+            ${content}
+        </svg>`;
+    }
+
+    // Generator Visual SVG Roda Seri 3 (Presisi Tinggi Viewport 550x260)
+    function drawGearSVG(cx, cy, r, teeth, label, color="#0b2340", subText="") {
+        let teethPath = "";
+        for (let i = 0; i < teeth; i++) {
+            let angle = (i * 360 / teeth) * Math.PI / 180;
+            let xOuter = cx + (r + 4) * Math.cos(angle);
+            let yOuter = cy + (r + 4) * Math.sin(angle);
+            teethPath += `<circle cx="${xOuter}" cy="${yOuter}" r="2.5" fill="${color}"/>`;
+        }
+        let textDisplay = subText ? `<text x="${cx}" y="${cy + r + 20}" font-family="Inter, sans-serif" font-size="12" font-weight="800" fill="#334155" text-anchor="middle">${subText}</text>` : "";
+        return `
+            <g>
+                <circle cx="${cx}" cy="${cy}" r="${r}" fill="#f8fafc" stroke="${color}" stroke-width="3.5"/>
+                <circle cx="${cx}" cy="${cy}" r="${r*0.65}" fill="none" stroke="${color}" stroke-width="1.8" stroke-dasharray="4,4"/>
+                ${teethPath}
+                <circle cx="${cx}" cy="${cy}" r="15" fill="#0b2340"/>
+                <circle cx="${cx}" cy="${cy}" r="4" fill="#fff"/>
+                <text x="${cx}" y="${cy + 6}" font-family="Inter, sans-serif" font-size="16" font-weight="900" fill="#ffffff" text-anchor="middle">${label}</text>
+                ${textDisplay}
+            </g>
+        `;
+    }
+
+    function drawArrowSVG(cx, cy, r, startAngle, endAngle, isClockwise=true, color="#c0392b") {
+        let radStart = startAngle * Math.PI / 180;
+        let radEnd = endAngle * Math.PI / 180;
+        let x1 = cx + r * Math.cos(radStart);
+        let y1 = cy + r * Math.sin(radStart);
+        let x2 = cx + r * Math.cos(radEnd);
+        let y2 = cy + r * Math.sin(radEnd);
+        let sweep = isClockwise ? 1 : 0;
+        let marker = color === "#c0392b" ? "url(#arrowRed)" : "url(#arrowGold)";
+        return `<path d="M ${x1} ${y1} A ${r} ${r} 0 0 ${sweep} ${x2} ${y2}" fill="none" stroke="${color}" stroke-width="3.2" marker-end="${marker}"/>`;
+    }
+
+    function konversiKualifikasiPRC(correct) {
+        let nilai = Math.round((correct / 25) * 100);
+        let kategori = "";
+        if (correct >= 23) kategori = "Sangat Memenuhi Syarat (SMS)";
+        else if (correct >= 19) kategori = "Memenuhi Syarat (MS)";
+        else if (correct >= 15) kategori = "Cukup Memenuhi Syarat (CMS)";
+        else kategori = "Kurang Memenuhi Syarat (KMS)";
+        return { nilai: nilai, kategori: kategori };
+    }
+
+    // 25 SOAL SERI 3 PENALARAN MEKANIS TNI (SOAL BARU 100%)
+    const rawKecerdasan = [
+        {
+            no: 1,
+            q: "Sistem Roda Gigi Diferensial Planetarium: Roda Matahari A di pusat diputar searah jarum jam (CW) dengan 120 rpm. Roda Planet B1 dan B2 bertumpu pada Carrier Lengan C yang bebas berputar. Ring Gear Luar D dikunci (DIAM). Ke manakah arah putaran Lengan C?",
+            media: makeSvgWrapper(`
+                <circle cx="275" cy="130" r="105" fill="#f8fafc" stroke="#0b2340" stroke-width="4.5" stroke-dasharray="8,5"/>
+                <text x="275" y="16" font-family="Inter, sans-serif" font-size="13" font-weight="900" fill="#0b2340" text-anchor="middle">Ring Gear D (Dikunci/Diam)</text>
+                <line x1="275" y1="70" x2="275" y2="190" stroke="#d4a017" stroke-width="6" stroke-linecap="round"/>
+                <circle cx="275" cy="130" r="8" fill="#d4a017"/>
+                <text x="310" y="134" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#d4a017">Lengan C</text>
+                ${drawGearSVG(275, 130, 32, 12, 'A', '#0b2340', 'Sun 120RPM')}
+                ${drawGearSVG(275, 70, 24, 8, 'B1', '#0b2340')}
+                ${drawGearSVG(275, 190, 24, 8, 'B2', '#0b2340')}
+                ${drawArrowSVG(275, 130, 44, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Searah jarum jam (CW)",
+                "B. Berlawanan arah jarum jam (CCW)",
+                "C. Diam tidak berputar",
+                "D. Berputar bolak-balik (Oscillating)"
+            ],
+            ans: 0,
+            exp: "Prinsip Planetary Gear Differential: Ketika Roda Matahari A berputar CW dan Ring Gear D dikunci, Roda Planet B berotasi CCW sambil mengorbit di sepanjang bagian dalam Ring Gear D ke arah CW. Akibatnya, Lengan Carrier C ikut terseret berputar searah jarum jam (CW)."
+        },
+        {
+            no: 2,
+            q: "Sistem Reduksi Majemuk 4-Tingkat (Compound Step Reduction): Roda A (15T) menggerakkan B (45T). B seporos dengan C (15T). C menggerakkan D (60T). Jika A diputar CW dengan kecepatan 360 rpm, berapakah kecepatan putar Roda D?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="120" width="180" height="20" fill="#cbd5e1" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(90, 130, 35, 10, 'A', '#0b2340', '15T / 360 RPM')}
+                ${drawGearSVG(200, 130, 60, 20, 'B', '#0b2340', '45T')}
+                ${drawGearSVG(320, 130, 30, 10, 'C', '#d4a017', '15T (Seporos B)')}
+                ${drawGearSVG(450, 130, 75, 24, 'D', '#0b2340', '60T')}
+                ${drawArrowSVG(90, 130, 48, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. 90 rpm",
+                "B. 30 rpm",
+                "C. 15 rpm",
+                "D. 120 rpm"
+            ],
+            ans: 1,
+            exp: "Kalkulasi Transmisi Reduksi Majemuk: 1) Tahap 1: RPM B = (Gigi A / Gigi B) × RPM A = (15 / 45) × 360 = 120 rpm. 2) C seporos B -> RPM C = 120 rpm. 3) Tahap 2: RPM D = (Gigi C / Gigi D) × RPM C = (15 / 60) × 120 = 30 rpm."
+        },
+        {
+            no: 3,
+            q: "Sistem Transmisi Sabuk Bersilang Ganda: Puli A diputar CW. A terhubung ke B via sabuk bersilang. B seporos dengan C. C terhubung ke D via sabuk bersilang. Bagaimanakah arah putaran Puli D terhadap Puli A?",
+            media: makeSvgWrapper(`
+                <line x1="80" y1="80" x2="220" y2="180" stroke="#0b2340" stroke-width="3"/>
+                <line x1="80" y1="180" x2="220" y2="80" stroke="#0b2340" stroke-width="3"/>
+                <line x1="260" y1="80" x2="450" y2="180" stroke="#c0392b" stroke-width="3"/>
+                <line x1="260" y1="180" x2="450" y2="80" stroke="#c0392b" stroke-width="3"/>
+                ${drawGearSVG(80, 130, 40, 14, 'A')}
+                ${drawGearSVG(220, 130, 40, 14, 'B')}
+                ${drawGearSVG(260, 130, 26, 8, 'C', '#d4a017')}
+                ${drawGearSVG(450, 130, 42, 14, 'D')}
+                ${drawArrowSVG(80, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Searah jarum jam (CW) - Sama dengan A",
+                "B. Berlawanan arah jarum jam (CCW)",
+                "C. Diam terkunci",
+                "D. Berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Prinsip Double Cross-Belt: A (CW) -> sabuk bersilang 1 membalikkan ke B (CCW) -> C seporos B (CCW) -> sabuk bersilang 2 membalikkan ke D (CW). Pembalikan dua kali menghasilkan arah akhir yang sama dengan awal (CW)."
+        },
+        {
+            no: 4,
+            q: "Sistem Sproket Rantai Berganda (Dual-Chain Drive): Motor memutar Sproket Utama A (CW). A terhubung ke B melalui Rantai 1. B seporos dengan C. C terhubung ke D via Rantai 2. Jika A diputar 400 rpm, bagaimanakah arah dan sifat pergerakan D?",
+            media: makeSvgWrapper(`
+                <polyline points="70,80 230,80 230,180 70,180 70,80" fill="none" stroke="#0b2340" stroke-width="3.5" stroke-dasharray="6,4"/>
+                <polyline points="270,90 470,90 470,170 270,170 270,90" fill="none" stroke="#d4a017" stroke-width="3.5" stroke-dasharray="6,4"/>
+                ${drawGearSVG(70, 130, 40, 14, 'A', '#0b2340', 'Sproket Utama')}
+                ${drawGearSVG(230, 130, 40, 14, 'B')}
+                ${drawGearSVG(270, 130, 28, 10, 'C', '#d4a017')}
+                ${drawGearSVG(470, 130, 35, 12, 'D')}
+                ${drawArrowSVG(70, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Berputar Berlawanan Arah Jarum Jam (CCW)",
+                "B. Berputar Searah Jarum Jam (CW) tanpa ada pembalikan arah",
+                "C. Terkunci karena rantai ganda",
+                "D. Berputar bolak-balik"
+            ],
+            ans: 1,
+            exp: "Prinsip Transmisi Rantai Sproket: Rantai menstransmisikan gaya putar tanpa mengubah arah rotasi pada setiap tingkatan. A (CW) -> Rantai 1 -> B (CW) -> C seporos B (CW) -> Rantai 2 -> D (CW)."
+        },
+        {
+            no: 5,
+            q: "Sistem Poros Konsentrik Ganda: Poros Dalam memutar Roda A (CW). Poros Luar memutar Roda B (CCW) secara independen. Roda Idler C dipasang bersinggungan di antara A dan B. Apa yang terjadi jika kecepatan sudut A dan B sama persis?",
+            media: makeSvgWrapper(`
+                <circle cx="275" cy="130" r="100" fill="#f8fafc" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(275, 130, 35, 12, 'A', '#0b2340', 'Poros Dalam (CW)')}
+                ${drawGearSVG(275, 55, 24, 8, 'C', '#d4a017', 'Idler C')}
+                <circle cx="275" cy="130" r="95" fill="none" stroke="#0b2340" stroke-width="4" stroke-dasharray="6,4"/>
+                <text x="275" y="248" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#0b2340" text-anchor="middle">Roda B Outer (CCW)</text>
+                ${drawArrowSVG(275, 130, 48, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda Idler C berputar sangat cepat pada posisinya tanpa bentrok",
+                "B. Roda C dan seluruh sistem akan bentrok terkunci (Jamming)",
+                "C. Roda C terlepas dari poros",
+                "D. Roda A berhenti berputar"
+            ],
+            ans: 0,
+            exp: "Analisis Gerak Konsentrik: Roda A (CW) mendorong Idler C ke arah CCW. Pada saat bersamaan, Roda Luar B (CCW) bersinggungan dalam dengan Idler C dan mendorong C ke arah CCW juga. Karena kedua dorongan harmonis berarah CCW, Roda C berputar lancar tanpa bentrok."
+        },
+        {
+            no: 6,
+            q: "Idler Gear Ganda Kontra-Rotasi: Roda A (CW) menggerakkan dua Idler terpisah: Idler B1 di atas dan Idler B2 di bawah. B1 dan B2 sama-sama menggerakkan Roda C di kanan. Bagaimana kondisi Roda C?",
+            media: makeSvgWrapper(`
+                ${drawGearSVG(120, 130, 40, 14, 'A')}
+                ${drawGearSVG(240, 70, 30, 10, 'B1')}
+                ${drawGearSVG(240, 190, 30, 10, 'B2')}
+                ${drawGearSVG(360, 130, 40, 14, 'C')}
+                ${drawArrowSVG(120, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda C berputar lancar Searah Jarum Jam (CW)",
+                "B. Roda C berputar lancar Berlawanan Arah Jarum Jam (CCW)",
+                "C. Sistem TERKUNCI MACET (Jamming) karena konflik arah dorong pada C",
+                "D. Roda C berputar dua kali lebih cepat"
+            ],
+            ans: 0,
+            exp: "Evaluasi Jalur Ganda: 1) Jalur Atas: A (CW) -> B1 (CCW) -> C (CW). 2) Jalur Bawah: A (CW) -> B2 (CCW) -> C (CW). Karena kedua jalur memberikan dorongan arah yang sama persis (CW) pada Roda C, Roda C berputar lancar CW."
+        },
+        {
+            no: 7,
+            q: "Analisis Torsi dan Kecepatan: Roda A (10T) diputar oleh motor listrik. A menggerakkan B (50T). B seporos dengan C (15T). C menggerakkan D (45T). Manakah roda yang menghasilkan TORSI TERBESAR?",
+            media: makeSvgWrapper(`
+                <rect x="200" y="120" width="130" height="20" fill="#cbd5e1" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(100, 130, 25, 8, 'A', '#0b2340', '10T (Input)')}
+                ${drawGearSVG(210, 130, 70, 22, 'B', '#0b2340', '50T')}
+                ${drawGearSVG(310, 130, 30, 10, 'C', '#d4a017', '15T')}
+                ${drawGearSVG(430, 130, 60, 18, 'D', '#0b2340', '45T (Output)')}
+                ${drawArrowSVG(100, 130, 36, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda A",
+                "B. Roda B",
+                "C. Roda C",
+                "D. Roda D"
+            ],
+            ans: 3,
+            exp: "Prinsip Mekanika Torsi: Torsi berbanding terbalik dengan kecepatan putar (RPM). Rasio reduksi total = (50/10) × (45/15) = 5 × 3 = 15 kali reduksi. Kecepatan terrendah berada pada Roda D, sehingga Roda D menghasilkan Torsi Terbesar."
+        },
+        {
+            no: 8,
+            q: "Rangkaian Planetarium Kompleks: Roda A (Sun) diputar CW. Roda Planet B bersinggungan dengan A dan bersinggungan dalam dengan Ring Gear C. Jika Ring Gear C diputar CCW oleh motor luar, bagaimana kecepatan rotasi Planet B pada porosnya sendiri?",
+            media: makeSvgWrapper(`
+                <circle cx="275" cy="130" r="100" fill="#f8fafc" stroke="#0b2340" stroke-width="4" stroke-dasharray="7,4"/>
+                <text x="275" y="18" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#0b2340" text-anchor="middle">Ring C (Diputar CCW)</text>
+                ${drawGearSVG(275, 130, 35, 12, 'A', '#0b2340', 'Sun (CW)')}
+                ${drawGearSVG(275, 60, 25, 8, 'B', '#0b2340', 'Planet B')}
+                ${drawArrowSVG(275, 130, 48, 220, 340, true, '#c0392b')}
+                ${drawArrowSVG(275, 130, 112, 340, 220, false, '#d4a017')}
+            `, 550, 260),
+            opts: [
+                "A. Rotasi B pada porosnya bertambah cepat (Superposisi Searah CCW)",
+                "B. Rotasi B menjadi melambat atau berhenti",
+                "C. Roda B berputar searah jarum jam (CW)",
+                "D. Roda B pecah terkunci"
+            ],
+            ans: 0,
+            exp: "Analisis Kecepatan Relatif: A (CW) mendorong permukaan dalam B ke kiri (rotasi B = CCW). Ring C (CCW) mendorong permukaan luar B ke kiri juga (rotasi B = CCW). Kedua aksi saling memperkuat rotasi B pada porosnya hingga semakin cepat."
+        },
+        {
+            no: 9,
+            q: "Sistem Segitiga Terkunci Majemuk: Tiga roda gigi A, B, dan C disusun melingkar saling bersinggungan. Roda C terhubung ke Roda D melalui sabuk terbuka. Jika Roda A diputar CW, apa yang terjadi pada Roda D?",
+            media: makeSvgWrapper(`
+                <line x1="330" y1="130" x2="450" y2="130" stroke="#0b2340" stroke-width="3"/>
+                <line x1="330" y1="180" x2="450" y2="180" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(170, 90, 35, 12, 'A')}
+                ${drawGearSVG(110, 175, 35, 12, 'B')}
+                ${drawGearSVG(230, 175, 35, 12, 'C')}
+                ${drawGearSVG(450, 155, 35, 12, 'D')}
+                ${drawArrowSVG(170, 90, 48, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda D berputar lancar CW",
+                "B. Roda D berputar lancar CCW",
+                "C. Roda D DIAM karena segitiga A-B-C macet terkunci (Jamming)",
+                "D. Roda D berputar bolak-balik"
+            ],
+            ans: 2,
+            exp: "Konflik Jamming Segitiga: Konfigurasi 3 roda gigi melingkar (A-B-C) saling bersinggungan mengalami bentrok arah (Jamming), sehingga seluruh segitiga terkunci diam. Karena C tidak berputar, Roda D juga DIAM."
+        },
+        {
+            no: 10,
+            q: "Perhitungan RPM Rantai Sproket Bertingkat: Sproket A (20T) diputar 240 rpm (CW). A terhubung rantai ke B (40T). B seporos C (15T). C terhubung rantai ke D (45T). Berapakah RPM akhir Roda D?",
+            media: makeSvgWrapper(`
+                <polyline points="90,90 220,90 220,170 90,170 90,90" fill="none" stroke="#0b2340" stroke-width="3" stroke-dasharray="5,4"/>
+                <polyline points="260,95 440,95 440,165 260,165 260,95" fill="none" stroke="#d4a017" stroke-width="3" stroke-dasharray="5,4"/>
+                ${drawGearSVG(90, 130, 30, 10, 'A', '#0b2340', '20T / 240RPM')}
+                ${drawGearSVG(220, 130, 50, 16, 'B', '#0b2340', '40T')}
+                ${drawGearSVG(260, 130, 25, 8, 'C', '#d4a017', '15T')}
+                ${drawGearSVG(440, 130, 55, 18, 'D', '#0b2340', '45T')}
+                ${drawArrowSVG(90, 130, 42, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. 80 rpm",
+                "B. 40 rpm",
+                "C. 120 rpm",
+                "D. 20 rpm"
+            ],
+            ans: 1,
+            exp: "Kalkulasi Rantai Bertingkat: 1) RPM B = (Gigi A / Gigi B) × RPM A = (20 / 40) × 240 = 120 rpm. 2) C seporos B -> RPM C = 120 rpm. 3) RPM D = (Gigi C / Gigi D) × RPM C = (15 / 45) × 120 = 40 rpm."
+        },
+        {
+            no: 11,
+            q: "Sistem Lima Roda Gigi dengan Idler Lepas: Roda A menggerakkan B, B menggerakkan C, C menggerakkan D, D menggerakkan E. Jika Roda C DILEPAS total dari sistem, apa yang terjadi pada Roda D dan E saat A diputar?",
+            media: makeSvgWrapper(`
+                ${drawGearSVG(70, 130, 30, 10, 'A')}
+                ${drawGearSVG(160, 130, 30, 10, 'B')}
+                ${drawGearSVG(250, 130, 30, 10, 'C', '#c0392b', 'DILEPAS')}
+                ${drawGearSVG(340, 130, 30, 10, 'D')}
+                ${drawGearSVG(430, 130, 30, 10, 'E')}
+                ${drawArrowSVG(70, 130, 42, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. D dan E tetap berputar seperti biasa",
+                "B. D dan E BERHENTI BERPUTAR karena transmisi daya terputus",
+                "C. D dan E berputar berlawanan arah",
+                "D. D dan E berputar 2 kali lebih cepat"
+            ],
+            ans: 1,
+            exp: "Pemutusan Jalur Daya: Roda C berfungsi sebagai transmisi perantara tengah. Jika C dilepas, aliran tenaga dari A dan B tidak sampai ke D dan E, sehingga Roda D dan E BERHENTI BERPUTAR."
+        },
+        {
+            no: 12,
+            q: "Sistem Sabuk Kombinasi Tiga Puli: Puli A diputar CW. A terhubung ke B via sabuk terbuka. B seporos dengan C. C terhubung ke D via sabuk bersilang. Tentukan perbandingan arah putaran Puli A dan Puli D!",
+            media: makeSvgWrapper(`
+                <line x1="90" y1="80" x2="210" y2="80" stroke="#0b2340" stroke-width="3"/>
+                <line x1="90" y1="180" x2="210" y2="180" stroke="#0b2340" stroke-width="3"/>
+                <line x1="250" y1="85" x2="430" y2="175" stroke="#c0392b" stroke-width="3"/>
+                <line x1="250" y1="175" x2="430" y2="85" stroke="#c0392b" stroke-width="3"/>
+                ${drawGearSVG(90, 130, 40, 14, 'A')}
+                ${drawGearSVG(210, 130, 40, 14, 'B')}
+                ${drawGearSVG(250, 130, 25, 8, 'C', '#d4a017')}
+                ${drawGearSVG(430, 130, 38, 12, 'D')}
+                ${drawArrowSVG(90, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Puli D berputar BERLAWANAN ARAH dengan Puli A (CCW)",
+                "B. Puli D berputar SEARAH dengan Puli A (CW)",
+                "C. Puli D diam tidak bergerak",
+                "D. Puli D berputar lebih cepat"
+            ],
+            ans: 0,
+            exp: "Analisis Jalur Sabuk: A (CW) -> sabuk terbuka ke B (CW) -> C seporos B (CW) -> sabuk bersilang ke D (CCW). Puli D berputar berlawanan arah dengan Puli A."
+        },
+        {
+            no: 13,
+            q: "Analisis Kecepatan Linier Sabuk: Puli A (Radius 30 cm) diputar 100 rpm. Terhubung sabuk terbuka ke Puli B (Radius 10 cm). Manakah pernyataan yang BENAR tentang kecepatan linier tepi roda (v) dan RPM?",
+            media: makeSvgWrapper(`
+                <line x1="120" y1="65" x2="380" y2="98" stroke="#0b2340" stroke-width="3"/>
+                <line x1="120" y1="195" x2="380" y2="162" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(120, 130, 60, 20, 'A', '#0b2340', 'R=30cm / 100RPM')}
+                ${drawGearSVG(380, 130, 25, 8, 'B', '#0b2340', 'R=10cm')}
+                ${drawArrowSVG(120, 130, 72, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Kecepatan linier sabuk pada tepi A dan B SAMA, namun RPM B 3 kali lebih besar (300 rpm)",
+                "B. Kecepatan linier tepi B 3 kali lebih lambat dari A",
+                "C. RPM A dan RPM B sama persis",
+                "D. Puli B berputar 100 rpm"
+            ],
+            ans: 0,
+            exp: "Prinsip Fisika Transmisi Sabuk: Karena dihubungkan oleh satu sabuk yang sama, kecepatan linier tepi (v = ω × r) pada A dan B adalah SAMA. Karena radius B 1/3 dari A, RPM B menjadi 3 kali lipat (300 rpm)."
+        },
+        {
+            no: 14,
+            q: "Sistem Roda Gigi Planet Internal Ganda: Roda Matahari A (CW) menggerakkan Planet B. Planet B menggerakkan Ring Gear Dalam C. Jika Ring C dihubungkan langsung ke Roda D di luar melalui gigi eksternal, tentukan arah putaran D!",
+            media: makeSvgWrapper(`
+                <g>
+                    <circle cx="220" cy="130" r="85" fill="#f8fafc" stroke="#0b2340" stroke-width="4"/>
+                    <circle cx="220" cy="130" r="90" fill="none" stroke="#0b2340" stroke-width="2" stroke-dasharray="4,4"/>
+                    <text x="220" y="32" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#0b2340" text-anchor="middle">Ring C (Internal/External)</text>
+                </g>
+                ${drawGearSVG(220, 130, 30, 10, 'A', '#0b2340', 'Sun CW')}
+                ${drawGearSVG(220, 75, 20, 7, 'B', '#0b2340', 'Planet B')}
+                ${drawGearSVG(365, 130, 45, 16, 'D', '#0b2340', 'Roda D Outer')}
+                ${drawArrowSVG(220, 130, 42, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Searah Jarum Jam (CW)",
+                "B. Berlawanan Arah Jarum Jam (CCW)",
+                "C. Diam terkunci",
+                "D. Berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Pelacakan Bertahap: 1) Sun A (CW) -> Planet B bersinggungan luar (CCW). 2) Planet B (CCW) bersinggungan dalam dengan Ring C -> Ring C berputar CCW. 3) Gigi luar Ring C (CCW) bersinggungan luar dengan Roda D -> Roda D berputar CW."
+        },
+        {
+            no: 15,
+            q: "Rangkaian Empat Roda Gigi Bertingkat Segitiga: A (CW) bersinggungan dengan B dan C. B dan C tidak saling bersinggungan. B dan C sama-sama bersinggungan dengan D di kanan. Bagaimana arah putaran Roda D?",
+            media: makeSvgWrapper(`
+                ${drawGearSVG(120, 130, 40, 14, 'A')}
+                ${drawGearSVG(250, 70, 35, 12, 'B')}
+                ${drawGearSVG(250, 190, 35, 12, 'C')}
+                ${drawGearSVG(380, 130, 40, 14, 'D')}
+                ${drawArrowSVG(120, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Searah Jarum Jam (CW)",
+                "B. Berlawanan Arah Jarum Jam (CCW)",
+                "C. Terkunci diam (Jamming)",
+                "D. Berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Analisis Jalur Paralel: 1) Jalur Atas: A (CW) -> B (CCW) -> D (CW). 2) Jalur Bawah: A (CW) -> C (CCW) -> D (CW). Kedua jalur memberikan dorongan yang harmonis (CW) pada Roda D, sehingga D berputar lancar CW."
+        },
+        {
+            no: 16,
+            q: "Roda A (60T) diputar 60 rpm (CW). A menggerakkan B (30T). B seporos dengan C (40T). C menggerakkan D (20T). Berapakah kecepatan dan arah putaran Roda D?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="120" width="130" height="20" fill="#cbd5e1" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(90, 130, 60, 20, 'A', '#0b2340', '60T / 60RPM')}
+                ${drawGearSVG(200, 130, 30, 10, 'B', '#0b2340', '30T')}
+                ${drawGearSVG(300, 130, 45, 14, 'C', '#d4a017', '40T')}
+                ${drawGearSVG(410, 130, 25, 8, 'D', '#0b2340', '20T')}
+                ${drawArrowSVG(90, 130, 72, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. 240 rpm (CW)",
+                "B. 240 rpm (CCW)",
+                "C. 120 rpm (CW)",
+                "D. 60 rpm (CCW)"
+            ],
+            ans: 0,
+            exp: "Hitung RPM & Arah: 1) A (CW) -> RPM B = (60/30) × 60 = 120 rpm (CCW). 2) C seporos B -> RPM C = 120 rpm (CCW). 3) C (CCW) -> RPM D = (40/20) × 120 = 240 rpm (CW)."
+        },
+        {
+            no: 17,
+            q: "Sistem Transmisi Sabuk-Gigi Kombinasi: A (CW) bersinggungan B. B seporos C. C terhubung sabuk terbuka ke D. D bersinggungan E. E terhubung sabuk bersilang ke F. Roda manakah yang berputar CCW?",
+            media: makeSvgWrapper(`
+                <line x1="180" y1="85" x2="280" y2="85" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="180" y1="175" x2="280" y2="175" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="390" y1="90" x2="480" y2="170" stroke="#c0392b" stroke-width="2.5"/>
+                <line x1="390" y1="170" x2="480" y2="90" stroke="#c0392b" stroke-width="2.5"/>
+                ${drawGearSVG(60, 130, 25, 8, 'A')}
+                ${drawGearSVG(120, 130, 25, 8, 'B')}
+                ${drawGearSVG(150, 130, 20, 6, 'C', '#d4a017')}
+                ${drawGearSVG(280, 130, 25, 8, 'D')}
+                ${drawGearSVG(340, 130, 25, 8, 'E')}
+                ${drawGearSVG(480, 130, 25, 8, 'F')}
+                ${drawArrowSVG(60, 130, 34, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda B, C, D, dan F",
+                "B. Roda A, E, dan F",
+                "C. Hanya Roda F",
+                "D. Roda B, C, dan E"
+            ],
+            ans: 0,
+            exp: "Pelacakan Arah Detail: A (CW) -> B (CCW) -> C seporos (CCW) -> D sabuk terbuka (CCW) -> E bersinggungan (CW) -> F sabuk bersilang (CCW). Roda berputar CCW adalah B, C, D, dan F."
+        },
+        {
+            no: 18,
+            q: "Sistem Poros Bertingkat Tiga Roda: Roda A (20T) diputar 180 rpm. A menggerakkan B (60T). Di poros B dipasang Roda C (30T) dan Roda D (15T). Manakah pernyataan yang BENAR mengenai Roda C dan D?",
+            media: makeSvgWrapper(`
+                <rect x="180" y="120" width="160" height="20" fill="#cbd5e1" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(80, 130, 30, 10, 'A', '#0b2340', '20T / 180RPM')}
+                ${drawGearSVG(200, 130, 65, 20, 'B', '#0b2340', '60T')}
+                ${drawGearSVG(270, 130, 40, 12, 'C', '#d4a017', '30T (Seporos B)')}
+                ${drawGearSVG(330, 130, 25, 8, 'D', '#d4a017', '15T (Seporos B)')}
+                ${drawArrowSVG(80, 130, 42, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda C dan D memiliki RPM sama persis (60 rpm) dan berputar ke arah yang sama",
+                "B. Roda D berputar 2 kali lebih cepat dari Roda C",
+                "C. Roda C berputar 180 rpm",
+                "D. Roda C dan D berputar berlawanan arah"
+            ],
+            ans: 0,
+            exp: "Prinsip Poros Majemuk Seporos: Semua roda yang terpasang pada satu poros yang sama (B, C, D) bergerak dengan kecepatan sudut (RPM) dan arah yang identik: RPM = (20/60) × 180 = 60 rpm."
+        },
+        {
+            no: 19,
+            q: "Rangkaian Sabuk Bersilang 4 Puli Seri: Puli A diputar CCW. A-B sabuk bersilang, B-C sabuk bersilang, C-D sabuk bersilang. Bagaimanakah arah putaran Puli D?",
+            media: makeSvgWrapper(`
+                <line x1="70" y1="80" x2="170" y2="180" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="70" y1="180" x2="170" y2="80" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="170" y1="80" x2="270" y2="180" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="170" y1="180" x2="270" y2="80" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="270" y1="80" x2="370" y2="180" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="270" y1="180" x2="370" y2="80" stroke="#0b2340" stroke-width="2.5"/>
+                ${drawGearSVG(70, 130, 30, 10, 'A')}
+                ${drawGearSVG(170, 130, 30, 10, 'B')}
+                ${drawGearSVG(270, 130, 30, 10, 'C')}
+                ${drawGearSVG(370, 130, 30, 10, 'D')}
+                ${drawArrowSVG(70, 130, 42, 320, 220, false, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Searah jarum jam (CW)",
+                "B. Berlawanan arah jarum jam (CCW)",
+                "C. Diam tidak berputar",
+                "D. Berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Aturan Pembalikan Ganjil: 3 tingkatan sabuk bersilang (jumlah pembalikan ganjil = 3 kali) akan membalikkan arah awal. A (CCW) -> B (CW) -> C (CCW) -> D (CW)."
+        },
+        {
+            no: 20,
+            q: "Analisis Efisiensi Transmisi Roda Gigi: Roda A (Input) menggerakkan B (Idler), B menggerakkan C (Output). Jika terjadi gesekan pada Idler B, bagaimana dampaknya pada RASIO KECEPATAN akhir Roda C?",
+            media: makeSvgWrapper(`
+                ${drawGearSVG(100, 130, 40, 14, 'A')}
+                ${drawGearSVG(220, 130, 25, 8, 'B', '#c0392b', 'Ada Gesekan')}
+                ${drawGearSVG(340, 130, 40, 14, 'C')}
+                ${drawArrowSVG(100, 130, 52, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Rasio kecepatan teori antara A dan C tetap sama (Gigi A / Gigi C)",
+                "B. Rasio kecepatan meningkat 2 kali lipat",
+                "C. Roda C berputar berlawanan arah",
+                "D. Roda A berhenti serta merta"
+            ],
+            ans: 0,
+            exp: "Prinsip Kinematika Roda Gigi: Ukuran dan kondisi Idler B tidak mempengaruhi rasio perbandingan kecepatan teoritis antara Roda Input A dan Roda Output C (Idler hanya meneruskan gerakan)."
+        },
+        {
+            no: 21,
+            q: "Roda A (15T) diputar CW. A bersinggungan B (45T). B seporos C (20T). C dihubungkan rantai ke D (40T). Berapakah jumlah putaran Roda D jika Roda A berputar 12 kali?",
+            media: makeSvgWrapper(`
+                <polyline points="290,95 440,95 440,165 290,165 290,95" fill="none" stroke="#0b2340" stroke-width="3" stroke-dasharray="5,4"/>
+                ${drawGearSVG(90, 130, 25, 8, 'A', '#0b2340', '15T')}
+                ${drawGearSVG(190, 130, 55, 18, 'B', '#0b2340', '45T')}
+                ${drawGearSVG(290, 130, 30, 10, 'C', '#d4a017', '20T')}
+                ${drawGearSVG(440, 130, 50, 16, 'D', '#0b2340', '40T')}
+                ${drawArrowSVG(90, 130, 36, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. 2 Putaran",
+                "B. 4 Putaran",
+                "C. 6 Putaran",
+                "D. 12 Putaran"
+            ],
+            ans: 0,
+            exp: "Hitung Putaran Penuh: 1) Putaran B = (15 / 45) × 12 = 4 putaran. 2) C seporos B -> C = 4 putaran. 3) Putaran D = (20 / 40) × 4 = 2 putaran penuh."
+        },
+        {
+            no: 22,
+            q: "Sistem Roda GigiPlanetarium Ring Bergerak: Sun A (CW) dan Ring Outer C (CW) sama-sama diputar searah jarum jam dengan kecepatan sudut yang sama. Bagaimana gerakan Planet B pada porosnya?",
+            media: makeSvgWrapper(`
+                <circle cx="275" cy="130" r="95" fill="#f8fafc" stroke="#0b2340" stroke-width="4" stroke-dasharray="6,4"/>
+                <text x="275" y="20" font-family="Inter, sans-serif" font-size="12" font-weight="900" fill="#0b2340" text-anchor="middle">Ring C (CW)</text>
+                ${drawGearSVG(275, 130, 35, 12, 'A', '#0b2340', 'Sun (CW)')}
+                ${drawGearSVG(275, 62, 22, 8, 'B', '#0b2340', 'Planet B')}
+                ${drawArrowSVG(275, 130, 48, 220, 340, true, '#c0392b')}
+                ${drawArrowSVG(275, 130, 108, 220, 340, true, '#d4a017')}
+            `, 550, 260),
+            opts: [
+                "A. Planet B TIDAK BEROTASI pada porosnya sendiri (Hanya mengorbit melingkar)",
+                "B. Planet B berrotasi sangat cepat CCW",
+                "C. Planet B terkunci macet",
+                "D. Planet B berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Keseimbangan Kecepatan Planetarium: Sun A (CW) mencoba memutar B ke arah CCW, sedangkan Ring C (CW) mencoba memutar B ke arah CW dengan kecepatan linier tepi yang sama. Kedua efek membatalkan rotasi B pada porosnya (B hanya mengorbit melingkar tanpa berotasi)."
+        },
+        {
+            no: 23,
+            q: "Empat Roda Gigi Bersinggungan Persegi (2x2) dengan Idler Tengah: A, B, C, D disusun 2x2. Di tengah diletakkan Roda E yang bersinggungan dengan keempat roda. Jika A diputar CW, apa yang terjadi pada sistem?",
+            media: makeSvgWrapper(`
+                ${drawGearSVG(200, 75, 30, 10, 'A')}
+                ${drawGearSVG(350, 75, 30, 10, 'B')}
+                ${drawGearSVG(350, 185, 30, 10, 'C')}
+                ${drawGearSVG(200, 185, 30, 10, 'D')}
+                ${drawGearSVG(275, 130, 24, 8, 'E', '#d4a017', 'Center E')}
+                ${drawArrowSVG(200, 75, 42, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda E berputar CCW, dan keempat roda A, B, C, D berputar lancar CW",
+                "B. Seluruh sistem macet terkunci (Jamming)",
+                "C. Hanya Roda A dan E yang berputar",
+                "D. Roda E diam"
+            ],
+            ans: 0,
+            exp: "Fungsi Central Idler: Roda Pusat E (CCW) bertindak sebagai pusat transmisi bintang (Star Gear Set). E mendorong keempat roda luar (A, B, C, D) ke arah yang sama persis yaitu CW tanpa bentrok."
+        },
+        {
+            no: 24,
+            q: "Roda A (10T) diputar CW. A bersinggungan B (30T). B seporos C (10T). C bersinggungan D (40T). Berapakah perbandingan kecepatan putar (RPM Ratio) antara Roda A dan Roda D?",
+            media: makeSvgWrapper(`
+                <rect x="190" y="120" width="120" height="20" fill="#cbd5e1" stroke="#0b2340" stroke-width="3"/>
+                ${drawGearSVG(90, 130, 25, 8, 'A', '#0b2340', '10T')}
+                ${drawGearSVG(190, 130, 55, 18, 'B', '#0b2340', '30T')}
+                ${drawGearSVG(290, 130, 25, 8, 'C', '#d4a017', '10T')}
+                ${drawGearSVG(410, 130, 65, 20, 'D', '#0b2340', '40T')}
+                ${drawArrowSVG(90, 130, 36, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. RPM A : RPM D = 12 : 1 (A berputar 12 kali lebih cepat dari D)",
+                "B. RPM A : RPM D = 4 : 1",
+                "C. RPM A : RPM D = 1 : 12",
+                "D. RPM A : RPM D = 6 : 1"
+            ],
+            ans: 0,
+            exp: "Kalkulasi Rasio Total Reduksi: Rasio Total = (Gigi B / Gigi A) × (Gigi D / Gigi C) = (30 / 10) × (40 / 10) = 3 × 4 = 12. Jadi RPM A adalah 12 kali lipat dari RPM D (12 : 1)."
+        },
+        {
+            no: 25,
+            q: "Rangkaian Kompleks 5 Roda Seri-Sabuk: A (CW) bersinggungan B -> B sabuk bersilang C -> C bersinggungan D -> D sabuk terbuka E. Manakah pernyataan yang BENAR tentang arah putaran Roda E?",
+            media: makeSvgWrapper(`
+                <line x1="130" y1="85" x2="230" y2="175" stroke="#c0392b" stroke-width="2.5"/>
+                <line x1="130" y1="175" x2="230" y2="85" stroke="#c0392b" stroke-width="2.5"/>
+                <line x1="330" y1="85" x2="430" y2="85" stroke="#0b2340" stroke-width="2.5"/>
+                <line x1="330" y1="175" x2="430" y2="175" stroke="#0b2340" stroke-width="2.5"/>
+                ${drawGearSVG(50, 130, 25, 8, 'A')}
+                ${drawGearSVG(110, 130, 25, 8, 'B')}
+                ${drawGearSVG(230, 130, 25, 8, 'C')}
+                ${drawGearSVG(310, 130, 25, 8, 'D')}
+                ${drawGearSVG(450, 130, 25, 8, 'E')}
+                ${drawArrowSVG(50, 130, 34, 220, 340, true, '#c0392b')}
+            `, 550, 260),
+            opts: [
+                "A. Roda E berputar Berlawanan Arah Jarum Jam (CCW)",
+                "B. Roda E berputar Searah Jarum Jam (CW)",
+                "C. Roda E diam terkunci",
+                "D. Roda E berputar bolak-balik"
+            ],
+            ans: 0,
+            exp: "Pelacakan Lengkap: 1) A (CW) -> B bersinggungan (CCW). 2) B (CCW) -> C sabuk bersilang (CW). 3) C (CW) -> D bersinggungan (CCW). 4) D (CCW) -> E sabuk terbuka (CCW). Roda E berputar CCW."
+        }
+    ];
+
+    function showSection(secId) {
+        document.getElementById('sec-start').style.display = 'none';
+        document.getElementById('sec-kecerdasan').style.display = 'none';
+        document.getElementById('sec-result').style.display = 'none';
+        document.getElementById('sec-review').style.display = 'none';
+
+        if (secId === 'start') document.getElementById('sec-start').style.display = 'block';
+        if (secId === 'kecerdasan') document.getElementById('sec-kecerdasan').style.display = 'block';
+        if (secId === 'result') document.getElementById('sec-result').style.display = 'block';
+        if (secId === 'review') document.getElementById('sec-review').style.display = 'block';
+    }
+
+    function startFullSimulation() {
+        const input = document.getElementById('inputNama').value.trim();
+        if (!input) {
+            alert('Mohon isi nama lengkap terlebih dahulu.');
+            return;
+        }
+        pName = input;
+        showSection('kecerdasan');
+        initKecerdasanSection();
+        startTimer();
+    }
+
+    function startTimer() {
+        if (timerInterval) clearInterval(timerInterval);
+        timerLeft = 1500; // 25 Menit
+        updateTimerDisplay();
+
+        timerInterval = setInterval(() => {
+            timerLeft--;
+            updateTimerDisplay();
+            if (timerLeft <= 0) {
+                clearInterval(timerInterval);
+                alert('Waktu tes Roda Gila Seri 3 telah habis!');
+                finishSimulation();
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        const m = Math.floor(timerLeft / 60);
+        const s = timerLeft % 60;
+        document.getElementById('timer').innerText = `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`;
+    }
+
+    function initKecerdasanSection() {
+        currentIdx_Kecerdasan = 0;
+        renderNavGrid_Kecerdasan();
+        renderQuestion_Kecerdasan();
+    }
+
+    function renderNavGrid_Kecerdasan() {
+        const grid = document.getElementById('k-navGrid');
+        grid.innerHTML = '';
+        rawKecerdasan.forEach((q, idx) => {
+            const btn = document.createElement('div');
+            btn.className = 'nav-item';
+            if (simulationResult.kecerdasan.userAns[idx] !== undefined) btn.classList.add('filled');
+            if (idx === currentIdx_Kecerdasan) btn.classList.add('active');
+            btn.innerText = idx + 1;
+            btn.onclick = () => {
+                currentIdx_Kecerdasan = idx;
+                renderQuestion_Kecerdasan();
+                renderNavGrid_Kecerdasan();
+            };
+            grid.appendChild(btn);
+        });
+    }
+
+    function renderQuestion_Kecerdasan() {
+        const q = rawKecerdasan[currentIdx_Kecerdasan];
+        document.getElementById('k-q-no').innerText = `Soal ${currentIdx_Kecerdasan + 1} dari ${rawKecerdasan.length}`;
+        document.getElementById('k-q-text').innerText = q.q;
+
+        const mediaContainer = document.getElementById('k-q-media');
+        mediaContainer.innerHTML = q.media;
+
+        const optsContainer = document.getElementById('k-options');
+        optsContainer.innerHTML = '';
+
+        q.opts.forEach((optText, oIdx) => {
+            const optDiv = document.createElement('div');
+            optDiv.className = 'opt';
+            if (simulationResult.kecerdasan.userAns[currentIdx_Kecerdasan] === oIdx) {
+                optDiv.classList.add('selected');
+            }
+            optDiv.innerHTML = `<div>${optText}</div>`;
+            optDiv.onclick = () => selectOpt_Kecerdasan(oIdx);
+            optsContainer.appendChild(optDiv);
+        });
+
+        document.getElementById('k-btn-next').innerText = (currentIdx_Kecerdasan === rawKecerdasan.length - 1) ? 'Selesai & Kirim' : 'Selanjutnya';
+    }
+
+    function selectOpt_Kecerdasan(oIdx) {
+        simulationResult.kecerdasan.userAns[currentIdx_Kecerdasan] = oIdx;
+        renderQuestion_Kecerdasan();
+        renderNavGrid_Kecerdasan();
+        
+        // AUTONEXT FUNCTIONALITY (200ms)
+        if (currentIdx_Kecerdasan < rawKecerdasan.length - 1) {
+            setTimeout(() => {
+                nextQ_Kecerdasan();
+            }, 200);
+        }
+    }
+
+    function prevQ_Kecerdasan() {
+        if (currentIdx_Kecerdasan > 0) {
+            currentIdx_Kecerdasan--;
+            renderQuestion_Kecerdasan();
+            renderNavGrid_Kecerdasan();
+        }
+    }
+
+    function nextQ_Kecerdasan() {
+        if (currentIdx_Kecerdasan < rawKecerdasan.length - 1) {
+            currentIdx_Kecerdasan++;
+            renderQuestion_Kecerdasan();
+            renderNavGrid_Kecerdasan();
+        } else {
+            if (confirm('Apakah Anda yakin ingin mengakhiri tes Seri 3 dan mengirimkan jawaban?')) {
+                finishSimulation();
+            }
+        }
+    }
+
+    function finishSimulation() {
+        clearInterval(timerInterval);
+
+        let correctCount = 0;
+        rawKecerdasan.forEach((q, idx) => {
+            if (simulationResult.kecerdasan.userAns[idx] === q.ans) {
+                correctCount++;
+            }
+        });
+
+        const evaluasi = konversiKualifikasiPRC(correctCount);
+
+        simulationResult.kecerdasan.benar = correctCount;
+        simulationResult.kecerdasan.ws = evaluasi.nilai;
+        simulationResult.kecerdasan.kategori = evaluasi.kategori;
+
+        document.getElementById('resNamaPeserta').innerText = `NAMA PESERTA: ${pName.toUpperCase()}`;
+        document.getElementById('resValWS').innerText = evaluasi.nilai;
+        document.getElementById('resKategori').innerText = `KATEGORI: ${evaluasi.kategori}`;
+        document.getElementById('resDetailSkor').innerText = `Jawaban Benar: ${correctCount} / ${rawKecerdasan.length} Soal`;
+
+        showSection('result');
+        sendToGoogleSheets();
+    }
+
+    function sendToGoogleSheets() {
+        if (isResultSubmitted) return;
+        isResultSubmitted = true;
+
+        const payload = {
+            sessionId: currentSessionId,
+            namaSiswa: pName,
+            program: "PENALARAN MEKANIS TNI",
+            namaTryout: "TES RODA GILA SERI 3",
+            tanggal: new Date().toLocaleDateString(),
+            waktuMulai: waktuMulai,
+            waktuSelesai: new Date().toLocaleString(),
+            durasi: "25 Menit",
+
+            kecerdasan: simulationResult.kecerdasan.ws,
+            kepribadian: "",
+            kecermatan: "",
+
+            tiu: simulationResult.kecerdasan.ws,
+            twk: "",
+            tkp: "",
+
+            pengetahuanUmum: "",
+
+            nilaiAkhir: simulationResult.kecerdasan.ws
+        };
+
+        fetch(APP_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(() => {
+            console.log("Data Tes Roda Gila Seri 3 berhasil dikirim ke Google Sheets MASTER.");
+        }).catch(err => {
+            console.error("Gagal mengirim data:", err);
+        });
+    }
+
+    function showReviewSection() {
+        document.getElementById('reviewNamaPeserta').innerText = `PESERTA: ${pName.toUpperCase()}`;
+        const container = document.getElementById('reviewContainerKecerdasan');
+        container.innerHTML = '';
+
+        rawKecerdasan.forEach((q, idx) => {
+            const uAns = simulationResult.kecerdasan.userAns[idx];
+            const isCorrect = (uAns === q.ans);
+
+            const item = document.createElement('div');
+            item.className = `review-item ${isCorrect ? 'correct' : 'incorrect'}`;
+
+            let optListHtml = '';
+            q.opts.forEach((optText, oIdx) => {
+                let badge = '';
+                if (oIdx === q.ans) badge += ' <span style="color:#27ae60; font-weight:bold;">[Kunci Benar]</span>';
+                if (oIdx === uAns && !isCorrect) badge += ' <span style="color:#c0392b; font-weight:bold;">[Jawaban Anda]</span>';
+
+                optListHtml += `<div style="margin:6px 0; font-size:14px;">
+                    ${optText} ${badge}
+                </div>`;
+            });
+
+            item.innerHTML = `
+                <div style="font-weight:bold; color:var(--navy); font-size:15px;">Soal ${idx + 1}</div>
+                <div style="margin-top:5px; font-size:14px; font-weight:600;">${q.q}</div>
+                <div class="visual-container">${q.media}</div>
+                <div style="margin:12px 0;">${optListHtml}</div>
+                <div class="pembahasan-box">
+                    <strong>Pembahasan Rinci:</strong><br>${q.exp}
+                </div>
+            `;
+
+            container.appendChild(item);
+        });
+
+        showSection('review');
+    }
+</script>
+</body>
+</html>
